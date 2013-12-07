@@ -1,5 +1,5 @@
 -- $Name: Вахта$
--- $Version: 0.1$
+-- $Version: 0.2$
 instead_version "1.9.1"
 require "para"
 require "dash"
@@ -121,7 +121,7 @@ toolbox=obj {
 nam="",
 dsc = "В углу лежит {ящик с инструментами}.",
 act=function(s)
-if have(key) then
+if key._taken then
 return "В ящике больше нет ничего полезного.";
 else
 s._exam=true;
@@ -134,14 +134,14 @@ key=obj {
 nam="Гаечный ключ",
 dsc="В ящике -- {гаечный ключ}.",
 inv="Гаечный ключ -- старомодно, но удобно. Хорошо подходит для того, чтобы откручивать руки.",
-tak="Я взял гаечный ключ.",
+tak=function(s) s._taken=true;return "Я взял гаечный ключ." end,
 use=function(s,v)
-if v==tube then
-tube._done=true;
-take(tube);
-return "Всё-таки гаечный ключ -- полезная штука! Раз-раз, и негодная труба выломана из стены. Теперь всё выглядит идеально.";
+if v==tube and tube._done then
+  tube._done=true;
+  take(tube);
+  return "Всё-таки гаечный ключ -- полезная штука! Раз-раз, и негодная труба выломана из стены. Теперь всё выглядит идеально.";
 elseif v==hand and not hand._oil then
-return "Я пытаюсь открутить руку ключом, но ничего не выходит. Ни одна из гаек не желает поворачиваться.";
+  return "Я пытаюсь открутить руку ключом, но ничего не выходит. Ни одна из гаек не желает поворачиваться.";
 elseif v==hand and hand._oil and not main._hand then
 main._hand=true;
 remove(key,me());

@@ -424,7 +424,7 @@ hack = R {
 	forcedsc = true;
 	dsc = function(s)
 		if s._s == 1 then
-			p [[HX-OS 14.1^^DEBUG INTERTFACE^^]];
+			p [[HX-OS 14.1^^DEBUG INTERFACE^^]];
 			if _mem[0x78] ~= 0xff then
 				p [[CRC FAILED]]
 			else
