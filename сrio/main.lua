@@ -7,6 +7,7 @@ R = room
 O = obj
 rem = remove
 mf = math.floor
+sf = string.format
 
 _alert = false
 
@@ -451,15 +452,15 @@ hack = R {
 				if i == 7 then
 					r = 255
 				end
-				pn (string.format("P%02x: %02x", i, r))
+				pn (sf("P%02x: %02x", i, r))
 			end
 		elseif s._s == 4 then
 			pr "Addr: <u>"
-			pr ("{a0|", string.format("%x", a0._s), "}")
-			pr ("{a1|", string.format("%x</u> ", a1._s), "}")
+			pr ("{a0|", sf("%x", a0._s), "}")
+			pr ("{a1|", sf("%x</u> ", a1._s), "}")
 			pr " Data: [<u>"
-			pr ("{a2|", string.format("%x", a2._s), "}")
-			pr ("{a3|", string.format("%x", a3._s), "}")
+			pr ("{a2|", sf("%x", a2._s), "}")
+			pr ("{a3|", sf("%x", a3._s), "}")
 			pr "</u>]"
 		end
 
