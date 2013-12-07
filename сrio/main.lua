@@ -1,6 +1,8 @@
 --$Name:Отсек K007$
 instead_version "1.9.1"
 require "para"
+require "dash"
+require "quotes"
 require "hideinv"
 
 R = room
@@ -12,7 +14,6 @@ sf = string.format
 _alert = false
 
 require "xact"
-require "format"
 require "nouse"
 
 main = R {
