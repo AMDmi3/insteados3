@@ -4,7 +4,7 @@ require "dash";
 game.codepage="UTF-8";
 game.use = function()
 p'Би-би. Я не могу этого сделать.';
-hp = hp - 1; if hp == 0 then goto('end5');end;
+hp = hp - 1; if hp == 0 then walk('end5');end;
 end;
 game.forcedsk = true;
 
@@ -95,7 +95,7 @@ glass2 = obj{
       dsc = 'Отсек почти пуст. В стене открыт огромный {иллюминатор}.';
       act = 'Стекло кажется прочным. Пояс астероидов остался позади.';
       used = function(s,w)
-      if w == blaster then  inv():del('blaster');inv():del('st'); goto('end4'); end;
+      if w == blaster then  inv():del('blaster');inv():del('st'); walk('end4'); end;
       end;
 };
 panel2 = obj{
@@ -103,7 +103,7 @@ panel2 = obj{
       dsc = 'Рядом стоит {панель} управления. ';
       act = 'Компьютерный терминал не работает.';
       used = function(s,w) 
-      if w == blaster then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
       end;
 };
@@ -111,7 +111,7 @@ door = obj{
       nam = '_';
       dsc = 'Можно выйти в {коридор}.';
       act = function()
-      goto('loc7');
+      walk('loc7');
       end;
 };
 
@@ -121,7 +121,7 @@ loc6 = room {
 	},
 	enter = function()
 		if q1 == 0 then q1 = 1; inv():add('st');end;
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 door1 = obj{
@@ -129,10 +129,10 @@ door1 = obj{
       dsc = 'Все двери заблокированы. В углу есть {ворота}, ведущие в ремонтный отсек.';
       act = function()
       if q2 == 0 then p[[Внимание! Отсек разгерметизирован! 
-      ^Для устранения неполадок вставьте чип-ключ.]]; else goto('loc10'); end;
+      ^Для устранения неполадок вставьте чип-ключ.]]; else walk('loc10'); end;
       end;
       used = function(s,w)
-      if w == key1 then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == key1 then hp = hp - 1; if hp == 0 then walk('end5');end;
       q2 = 1; inv():del('key1'); p'Би-би. Процесс устранения неполадок завершен.'; end;
       end;
 };
@@ -152,9 +152,9 @@ robo1 = obj{
       used = function(s,w)
       if w == stone then q3 = 1; p[[Обломок метеорита с силой ударяет в корпус неисправного робота. 
       Манипулятор разжимается, высвобождая бластер. Робот забирает оружие себе.]];
-      hp = hp - 1; if hp == 0 then goto('end5');end;
+      hp = hp - 1; if hp == 0 then walk('end5');end;
       inv():del('stone'); inv():add('blaster');  end;
-      if w == blaster then  hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then  hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
      
       end;
@@ -166,7 +166,7 @@ loc7 = room {
 	vway("_", [[Можно вернуться {назад}.]], 'loc6'),	
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 loc8 = room {
@@ -177,14 +177,14 @@ loc8 = room {
 	vway("_", [[На стене чернеют кислотные разводы. Можно вернуться {назад}.]], 'loc7'),	
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 cap1 = obj{
       nam = '_';
       dsc = 'В центре отсека установлена большая {криокапсула}.';
       used = function(s,w)
-      if w == blaster then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
       end;
       act = 'Это отдельная капсула для элитных членов экипажа. ^Капсула пуста. На разбитом стекле есть следы крови.';
@@ -194,12 +194,12 @@ key = obj{
       dsc = 'На полу лежит оторванный {манипулятор}.';
       act = function()
       if q4 == 0 then 
-      hp = hp - 1; if hp == 0 then goto('end5');end;
+      hp = hp - 1; if hp == 0 then walk('end5');end;
       p[[Робот вынимает из манипулятора синий чип-ключ.
       ]]; inv():add('key1'); q4 = 1; else p'Би-би. Мне не нужен третий манипулятор.';end;
       end;
       used = function(s,w)
-      if w == blaster then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
       end;
 };
@@ -213,7 +213,7 @@ loc9 = room {
 	vway("_", [[Можно вернуться в {коридор}.]], 'loc8'),	
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 glass3 = obj{
@@ -221,7 +221,7 @@ glass3 = obj{
       dsc = 'В центре стены размещен большой {иллюминатор}.';
       act = 'Стекло разбито и закрыто снаружи стальной пластиной.';
       used = function(s,w)
-      if w == blaster then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
       end;
 };
@@ -229,7 +229,7 @@ stone = obj{
       nam = 'метеорит';
       inv = 'Довольно крупный и тяжелый осколок метеорита.';
       use = function(s,w)
-      if not (w == robo1) then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if not (w == robo1) then hp = hp - 1; if hp == 0 then walk('end5');end;
       inv():del('stone');p'Метеорит падает на пол и разбивается на части.'; end;
       end;
 };
@@ -238,14 +238,14 @@ repair = obj{
       dsc = 'В центре стоит ремонтный {модуль}.';
       act = function()
       if q5 == 0 then 
-      hp = hp - 1; if hp == 0 then goto('end5');end;
+      hp = hp - 1; if hp == 0 then walk('end5');end;
       p[[Ремонтный модуль сломан. Похоже, в него, разбив иллюминатор, врезался обломок метеорита.
       Робот аккуратно достаёт его своими манипуляторами, но всё бесполезно. Модуль уже не починить.Что же делать?
       ]]; 
       inv():add('stone'); q5 = 1; else p'Би-би. Что же делать? Смириться и ждать отключения?';end;
       end;
       used = function(s,w)
-      if w == blaster then hp = hp - 1; if hp == 0 then goto('end5');end;
+      if w == blaster then hp = hp - 1; if hp == 0 then walk('end5');end;
       p'Робот стреляет из бластера. Ничего не происходит.'; inv():del('blaster'); end;
       end;
 };
@@ -255,7 +255,7 @@ loc10 = room {
 	vway("_", [[Можно вернуться в {коридор}.]], 'loc7'),	
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 cap2 = obj{
@@ -263,7 +263,7 @@ cap2 = obj{
       dsc = 'В центре отсека установлена большая {криокапсула}.';
       act = 'В капсуле спит мужчина. Его лицо кажется очень знакомым. ^ Робот начинает узнавать в нём себя. Но как это возможно?';
       used = function(s,w)
-      if w == blaster then inv():del('st'); inv():del('blaster'); goto('end1');  end;
+      if w == blaster then inv():del('st'); inv():del('blaster'); walk('end1');  end;
       end;  
 };
 alien = obj{
@@ -271,7 +271,7 @@ alien = obj{
       dsc = 'Её пытается разбить ужасный {мутант}.';
       act = 'Это бывший член экипажа. Его руки превратились в острые клешни, из головы высовываются мерзкие щупальца. Похоже, он заразился инопланетным вирусом.';
       used = function(s,w)
-      if w == blaster then inv():del('blaster');inv():del('st'); goto('end2'); end;
+      if w == blaster then inv():del('blaster');inv():del('st'); walk('end2'); end;
       end;
 };
 loc11 = room {
@@ -280,7 +280,7 @@ loc11 = room {
 	vway("a1", [[Можно убежать в {коридор}.]], 'loc12')	
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 next1 = obj{
@@ -289,7 +289,7 @@ next1 = obj{
       Робот смотрит на своё мертвое тело в капсуле и ждёт отключения. Вскоре сигнал пропадает.
       {далее}]];
       act = function(s,w)
-      hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; goto('loc6');
+      hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; walk('loc6');
       end;
 };
 end1 = room {
@@ -303,7 +303,7 @@ next2 = obj{
       к роботу и мощным ударом разрубает его на части. Человек в капсуле внезапно открывает глаза и кричит.
       Настоящий кошмар только начинается. {далее}]];
       act = function(s,w)
-       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; goto('loc6');
+       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; walk('loc6');
       end;
 };
 end2 = room {
@@ -318,17 +318,17 @@ loc12 = room {
 	Наступает решающий момент. {Би-би}!]], 'loc13')
 	},
 	enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 alien1 = obj{
       nam = '_';
       dsc = 'К роботу медленно приближается {мутант}, отрезая все пути к отступлению.';
       act = function() inv():del('blaster');inv():del('st');inv():del('stone');
-      goto('end3');
+      walk('end3');
       end;
       used = function(s,w)
-      if w == blaster then inv():del('blaster');inv():del('st'); goto('end2'); end;
+      if w == blaster then inv():del('blaster');inv():del('st'); walk('end2'); end;
       end;
 };
 glass4 = obj{
@@ -336,7 +336,7 @@ glass4 = obj{
       dsc = 'В стене открыт огромный {иллюминатор}.';
       act = 'Стекло кажется прочным. За ним холод и бесконечная тьма.';
       used = function(s,w)
-      if w == blaster then inv():del('blaster');inv():del('st'); goto('ending'); end;
+      if w == blaster then inv():del('blaster');inv():del('st'); walk('ending'); end;
       end;
 };
 loc13 = room {
@@ -344,7 +344,7 @@ loc13 = room {
 	obj = {alien1, glass4, 	
 	},
     enter = function()
-		hp = hp - 1; if hp == 0 then goto('end5');end;
+		hp = hp - 1; if hp == 0 then walk('end5');end;
 	end,
 };
 next3 = obj{
@@ -354,7 +354,7 @@ next3 = obj{
       внезапно открывает глаза и кричит. Настоящий кошмар только начинается.
      {далее}]];
       act = function(s,w)
-       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; goto('loc6');
+       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; walk('loc6');
       end;
 };
 end3 = room {
@@ -369,7 +369,7 @@ next4 = obj{
 	  Вакуум засасывает робота наружу. Оказавшись в открытом космосе, робот печально смотрит вслед удаляющемуся кораблю. 
       Затем сигнал пропадает. {далее}]];
       act = function(s,w)
-       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; goto('loc6');
+       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; walk('loc6');
       end;
 };
 end4 = room {
@@ -383,7 +383,7 @@ next5 = obj{
       Батарея робота окончательно выходит из строя. Сигнал пропадает.
       {далее}]];
       act = function(s,w)
-       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; goto('loc6');
+       hp = 31; q1 = 0; q2 = 0; q3 = 0; q4 = 0; q5 = 0; walk('loc6');
       end;
 };
 end5 = room {
