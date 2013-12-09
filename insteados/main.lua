@@ -9,18 +9,72 @@ require "timer"
 require "xact"
 
 main = room {
-   nam = "ИНСТЕДОЗ 3"
-  ,act = function(s,v)
-    local fn = gamefile_(v..".lua");
-    fn();
-   end
-  ,obj = {
-    vobj("watch", [[{"Вахта"} Василий Воронков^]]),
-    vobj("longwork", [[{"Долгая служба"} Василий Воронков^]]),
-    vobj("repair", [[{"Ремонт"} Василий Воронков^]]),
-    vobj("crio", [[{"Отсек 0007"} Пётр Косых^]]),
-    vobj("brokencycle", [[{"Разорванный цикл"} Андрей Лобанов^]]),
-    vobj("meteor", [[{"Пояс астероидов"} Дмитрий Дударь^]]),
-    vobj("wake", [[{"Пробуждение"} Дмитрий Колесников^]])
-  }
+   nam = "Об игре"
+  ,dsc = "Что-то об игре"
 }
+
+credits = room {
+   nam = "Создатели"
+  ,dsc = "Создатели игры"
+}
+
+function chapter(s)
+  s.inv = function(s)
+    local nm = deref(s);
+    gamefile_(nm..".lua")();
+  end
+  return menu(s);
+end
+
+before_About = menu {
+   nam = "Об игре"
+  ,inv = function() walk(main) end
+}
+
+before_Credits = menu {
+   nam = "Создатели"
+  ,inv = function() walk(credits) end
+}
+
+empty = menu { nam = "" }
+
+watch = chapter {
+  nam = "1. Вахта"
+}
+
+longwork = chapter {
+  nam = "2. Долгая служба"
+}
+
+repair = chapter {
+  nam = "3. Ремонт"
+}
+
+crio = chapter {
+  nam = "4. Отсек 007"
+}
+
+brokencycle = chapter {
+  nam = "5. Разорванный цикл"
+}
+
+meteor = chapter {
+  nam = "6. Пояс астероидов"
+}
+
+wake = chapter {
+  nam = "7. Пробуждение"
+}
+
+function init()
+  take(before_About);
+  take(before_Credits);
+  take(empty);
+  take(watch);
+  take(longwork);
+  take(repair);
+  take(crio);
+  take(brokencycle);
+  take(meteor);
+  take(wake);
+end

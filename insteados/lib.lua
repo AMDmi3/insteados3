@@ -28,34 +28,50 @@ function room(r)
       end
     end
   end
+  local exit = r.exit;
+  r.exit = function(s)
+    s.drawn = nil;
+    if exit ~= nil then
+      return exit(s);
+    end
+  end
   if r.pxa ~= nil then
     r.pic = function(s)
       local pxa = tc(s.pxa,s);
       if pxa == nil then
         return;
       end
-      local px = sprite.load("gfx/pic.jpg");
+      if s.drawn then
+        return game.cache;
+      end
+      if game.cache == nil then
+        game.cache = sprite.load("gfx/pic.png");
+      else
+        local pt = sprite.blank(500, 200);
+        sprite.copy(pt, game.cache, 0, 0);
+        sprite.free(pt);
+      end
       for _,v in ipairs(pxa) do
         local vv = tc(v[1],s);
         if vv ~= nil then
-          local spr = sprite.load("gfx/"..vv..".jpg");
+          local spr = sprite.load("gfx/"..vv..".png");
           local y = 0;
           if vv == "panel" then
             y = 60;
           elseif vv == "door1" or vv == "door1_open" then
-            y = 34;
+            y = 35;
           elseif vv == "door2" or vv == "door2_open" then
             y = 60;
           elseif vv == "door3" then
-            y = 59;
+            y = 60;
           elseif vv == "window" then
-            y = 70;
+            y = 62;
           elseif vv == "toolbox" then
             y = 171;
           elseif vv == "crio" then
-            y = 44;
+            y = 45;
           elseif vv == "robot" or vv == "robot_nohand" then
-            y = 70;
+            y = 75;
           elseif vv == "box" then
             y = 145;
           elseif vv == "shelf" then
@@ -66,14 +82,19 @@ function room(r)
             y = 135;
           elseif vv == "box3" then
             y = 110;
+          elseif vv == "blood" then
+            y = 107;
           elseif vv == "shaft" or vv == "shaft_open" then
             y = 55;
+          elseif vv == "mutant" then
+            y = 28;
           end
-          sprite.copy(spr, px, v[2], y);
+          sprite.copy(spr, game.cache, v[2], y);
           sprite.free(spr);
         end
       end
-      return px;
+      s.drawn = true;
+      return game.cache;
     end
   end
   return old_room(r);

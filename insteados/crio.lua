@@ -448,7 +448,7 @@ hack = R {
 			local t = txttab("20%", "left")
 			local tt = txttab("50%", "left")
 			pn ("1200"..t.."dd cd 01 2f"..tt.."INP R01,P07")
-			pn ("1204"..t.."2b 98 01 78"..tt.."CMP R01,[78]")
+			pn ("1204"..t.."2b 98 01 78"..tt.."CMP R01,addr:78")
 			pn ("1208"..t.."34 d0 12 14"..tt.."JN 1214")
 			pn ("120C"..t.."34 22 90 90"..tt.."WAIT")
 			pn ("1210"..t.."2b ee 12 00"..tt.."JUMP 1200")
