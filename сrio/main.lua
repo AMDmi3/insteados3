@@ -1,5 +1,6 @@
 --$Name:Отсек K007$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -344,6 +345,10 @@ ex = R {
 
 out = R {
 	nam = 'Криоблок';
+  pxa = {
+    { "door1", 50 },
+    { "box3", 380 }
+  },
 	dsc = [[Я в коридоре криоблока корабля.]];
 	obj = { slf },
 	way = { 'r7', 'ex' };
@@ -365,6 +370,12 @@ r7 = R {
 		end
 	end;
 	nam = 'К007';
+  pxa = {
+    { "door1", 10 },
+    { "panel", 220 },
+    { if_("exist(rat)","rat"), 180 },
+    { "crio", 300 }
+  };
 	dsc = [[В крио-отсеке.]];
 	obj = { cap, shl1, comp, fl };
 	way = { out };
@@ -406,6 +417,7 @@ p2 = room {
 
 hack = R {
 	hideinv = true;
+  pxa = { { "panel", 215 } };
 	entered = function(s)
 		s._flt = stead.mouse_filter(0)
 	end;
