@@ -41,9 +41,9 @@ function room(r)
       if pxa == nil then
         return;
       end
-      if s.drawn then
+      --[[if s.drawn then
         return game.cache;
-      end
+      end]]
       if game.cache == nil then
         game.cache = sprite.load("gfx/pic.png");
       else
