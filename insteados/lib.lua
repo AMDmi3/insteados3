@@ -62,6 +62,10 @@ function room(r)
             y = 60;
           elseif vv == "box2" then
             y = 50;
+          elseif vv == "rat" then
+            y = 135;
+          elseif vv == "box3" then
+            y = 110;
           end
           sprite.copy(spr, px, v[2], y);
           sprite.free(spr);
