@@ -6,6 +6,8 @@ require "dash"
 require "quotes"
 require "xact"
 
+_patterns = {};
+
 game.use = "Вариантов успешного завершения инструкций 0... Отмена действия."
 main = room {
     nam = "Подготовка к празднику",
@@ -74,13 +76,15 @@ store = room {
 		end;
 	end,
 	enter = function (s)
-		put("rat", here());
+		place("rat", here());
+		place("malt", here());
+		place("yeast", here());
 	end,
 }:disable();
 
 wishlist = obj {
 	nam = "Список пожеланий",
-	act = "Список блюд на вечеринку:^- Пиво^- Фруктовый салат^- Жареная картошка^",
+	act = "Список блюд на вечеринку:^- Пиво^- Фруктовый салат^- Жареный картофель^",
 	dsc = "{Список пожеланий персонала}^",
 }
 
@@ -93,20 +97,34 @@ ingridients = obj {
 mixer = obj {
 	var {content = 0, pattern = "Позиция напралена на склад. Паттерн записан."},
 	act = function (s)
+        yeast.mix = false;
+        malt.mix = false;
+        watermelon.mix = false;
+        pineapple.mix = false;
+        potato.mix = false;
+        water.mix = false;
+        rat.mix = false;
+        mayonnaise.mix = false;
 		if s.content == 0 then
 			s.content = 0;
 			return "Миксер пуст.";
 		elseif s.content == 19 then
 			s.content = 0;
+            _patterns[0] = true;
+            check_conditions();
 			return "Фруктовый салат готов. "..s.pattern;
 		elseif s.content == 28 then
 			s.content = 0;
+            _patterns[1] = true;
+            check_conditions();
 			return "Пиво готово. "..s.pattern;
 		elseif s.content == 64 then
 			s.content = 0;
 			return "Нагревательный элемент отсутствует. Миксер очищен.";
 		elseif s.content == 96 then
 			s.content = 0;
+            _patterns[2] = true;
+            check_conditions();
 			return "Жареный картофель готов. "..s.pattern;
 		else
 			s.content = 0;
@@ -117,9 +135,11 @@ mixer = obj {
 	dsc = "{Миксер}^",
 }
 
+
 separator = obj {
 	nam = "Сепаратор",
 	dsc = "{Молекулярный сепаратор}^",
+    acr = "Сепарируй и заливай.",
 }
 
 todo = obj {
@@ -171,6 +191,7 @@ gates = obj {
 }
 
 malt = obj {
+    var {mix = false},
 	nam = "Солод",
 	dsc = function (s)
 		if here() == "store" then
@@ -180,66 +201,124 @@ malt = obj {
 		end;
 	end,
 	act = function (s)
-		if here() ~= "store" then
+		if here() ~= store then
 			store:enable();
 			return "Этот ингридиент невозможно синтезировать. Придётся идти на склад."
+        else
+            take(malt);
+            return "Солод погружен в отсек №3.";
 		end;
 	end,
+    use = function (s, w)
+        if w == mixer then
+            if not s.mix then
+                mixer.content = mixer.content + 4;
+                s.mix = true;
+            end;
+            remove(s, me());
+            return s.nam.." помещён в миксер."
+        end
+    end,
 }
 
 yeast = obj {
+    var {mix = false},
 	nam = "Дрожжи",
 	dsc = function (s)
 		if here() == "store" then
-			return "Пробирки с {дрожжами}^";
+			return "Пробирка с {дрожжами}^";
 		else
 			return "{Дрожжи}^";
 		end;
 	end,
 	act = function (s)
-		if here() ~= "store" then
+		if here() ~= store then
 			store:enable();
 			return "Этот ингридиент невозможно синтезировать. Придётся идти на склад."
+        else
+            take(yeast);
+            return "Пробирка с дрожжами помещена в отсек №7";
 		end;
 	end,
+    use = function (s, w)
+        if w == mixer then
+            if not s.mix then
+                mixer.content = mixer.content + 8;
+                s.mix = true;
+            end;
+            remove(s, me());
+            return s.nam.." помещёны в миксер."
+        end
+    end,
+
 }
 
 watermelon = obj {
+    var {mix = false},
 	nam = "Арбузные кубики",
 	dsc = "Сухие {арбузные кубики}^",
 	act = function (s)
+        if not s.mix then
+            mixer.content = mixer.content + 1;
+            s.mix = true;
+        end;
 		return s.nam.." добавлены в миксер.";
 	end,
 }
 
 pineapple = obj {
+    var {mix = false},
 	nam = "Ананасовые кубики",
 	dsc = "Сухие {ананасовые кубики}^",
 	act = function (s)
+        if not s.mix then
+            mixer.content = mixer.content + 2;
+            s.mix = true;
+        end;
 		return s.nam.." добавлены в миксер.";
 	end,
 }
 
 mayonnaise = obj {
+    var {mix = false},
 	nam = "Майонез",
 	dsc = "Взбитый {концетрат жира с яйцами}^",
 	act = function (s)
+        if not s.mix then
+            mixer.content = mixer.content + 128;
+            s.mix = true;
+        end;
 		return s.nam.." добавлен в миксер.";
 	end,
 }
 
 potato = obj {
+    var {mix = false},
 	nam = "Картофельные бруски",
 	dsc = "Синтезированый {картофель}^",
 	act = function (s)
+        if not s.mix then
+            mixer.content = mixer.content + 64;
+            s.mix = true;
+        end;
+
 		return s.nam.." добавлены в миксер.";
 	end,
 }
 
 rat = obj {
+    var {mix = false},
 	var {_fired = false},
 	nam = "Крыса",
-	dsc = "В углу сидит бесстрашная {тощая тварь}^",
+	dsc = function(s)
+        state = "";
+        if s._fired then
+            state = "поджарена.";
+        else
+            state = "не поджарена.";
+        end
+        return "В углу сидит бесстрашная {тощая тварь}. Она "..state.."^";
+    end,
 	act = function (s)
 		if not have("rat") then
 			take(rat);
@@ -254,20 +333,36 @@ rat = obj {
 			take(water);
 			take(trash);
 			return "Думаю стоит тебя немного разделить.";
+        elseif w == mixer then
+            if s._fired then
+                if not s.mix then
+                    mixer.content = mixer.content + 32;
+                    s.mix = true;
+                end
+                return "Крыса добавлена в миксер.";
+            else
+                return "Необходимость добавления органической крысы в не выявлена. Операция отменена.";
+            end
 		end;
 	end,
-	inv = "Если тыкнуть крысу, она запищит.",
+	inv = "Если тыкнуть крысу, она запищит. Отпускать её однозначно не стоит.",
 }
 
 water = obj {
+    var {mix = false},
 	nam = "Вода",
 	dsc = "Вода, что тут ещё сказать.",
 	use = function (s, w)
 		if w == mixer then
+            if not s.mix then
+                s.mix = true;
+                mixer.content = mixer.content + 16;
+            end
 			remove(s, me());
 			return s.nam.." добавлена в миксер.";
 		end;
 	end,
+    inv = "Набор молекул, заключенный в ограниченом объёме.",
 }
 
 trash = obj {
@@ -282,4 +377,32 @@ destructor = obj {
 		take(s);
 		p "Распылитель пригодится. Мало ли каких тварей привлекают к себе заготовленые ингридиенты.";
 	end,
+    use = function (s, w)
+        if w == rat then
+            w._fired = true;
+            return "Один выстрел из термического распылителя в крысу превратит её в сгусток энергии при малейшей встряске. Обычно это позволяет убить чуть больше одной крысы за раз, когда они начинают бороться и убегать.";
+        end
+    end,
+    inv = function(s)
+        drop(s);
+        return "На складе распылителю самое место.";
+    end
 }
+
+endscreen = room {
+    nam = "Конец",
+    dsc = "Вот и подошел конец моему дежурству. Надеюсь вечеринка по случаю прибытия удастся.^Ну а мне пора в свой отсек, на очередную хабернацию.^"..txtc"^^Конец.",
+}
+
+greenlight = obj {
+    nam = "Зелёный индикатор",
+    inv = function (s)
+        walk("endscreen");
+    end,
+}
+
+function check_conditions ()
+    if(_patterns[0] and _patterns[1] and _patterns[2]) then
+        take("greenlight", me());
+    end;
+end
