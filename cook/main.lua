@@ -76,7 +76,10 @@ store = room {
 		end;
 	end,
 	enter = function (s)
-		place("rat", here());
+        if not have(rat) then
+		    place("rat", here());
+            rat._fired = false;
+        end
 		place("malt", here());
 		place("yeast", here());
 	end,
