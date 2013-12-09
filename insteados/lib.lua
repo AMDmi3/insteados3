@@ -44,7 +44,7 @@ function room(r)
             y = 60;
           elseif vv == "door1" or vv == "door1_open" then
             y = 34;
-          elseif vv == "door2" then
+          elseif vv == "door2" or vv == "door2_open" then
             y = 60;
           elseif vv == "door3" then
             y = 59;
@@ -66,6 +66,8 @@ function room(r)
             y = 135;
           elseif vv == "box3" then
             y = 110;
+          elseif vv == "shaft" or vv == "shaft_open" then
+            y = 55;
           end
           sprite.copy(spr, px, v[2], y);
           sprite.free(spr);
