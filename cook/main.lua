@@ -343,6 +343,7 @@ rat = obj {
                     mixer.content = mixer.content + 32;
                     s.mix = true;
                 end
+                remove(s, me());
                 return "Крыса добавлена в миксер.";
             else
                 return "Необходимость добавления органической крысы в не выявлена. Операция отменена.";
