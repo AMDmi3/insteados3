@@ -2,6 +2,7 @@
 --$Version: 1.0$
 --$Author: Андрей Лобанов
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -35,19 +36,24 @@ capsule_cap=obj{
 }
 button=obj{
    nam='Кнопка',
-   dsc='Рядом находистя {кнопка}.',
+   dsc='Рядом находится {кнопка}.',
    act=function()
       if not path(k007) then
 	 ways():add(k007)
-	 return 'Я нажал на кнопку и крышка плавно отъехала в сторону.'
-      else
-	 return 'Крышка уже открыта.'
-    end
-   end,
+      return 'Я нажал на кнопку и крышка плавно отъехала в сторону.'
+   else
+      return 'Крышка уже открыта.'
+   end
+  end,
 }
 k007=room{
    nam='K007',
    dsc='Тёмный отсек.',
+  pxa = {
+    { "door1", 10 },
+    { "panel", 220 },
+    { "crio", 300 }
+  };
    obj={'mcapsule','capsules','cabinets','cabinet'},
    exit=function(s,w)
       if w==crioblock and not have(cloth) then
@@ -102,6 +108,21 @@ cabinet=obj{
 }
 crioblock=room{
    nam='Криоблок',
+   _grate=0,
+   pxa = {
+    { "box3", 20 },
+    { "window", 120 },
+    { "window", 170 },
+    { "window", 220 },
+    { function(s)
+        if s._grate == 1 then
+          return "shaft";
+        elseif s._grate == 2 then
+          return "shaft_open";
+        end
+      end, 440},
+    { "door2", 300 }
+   },
    dsc='Коридор едва освещён.',
    obj={'grenade','lift'},
    way={'k007'},
@@ -120,9 +141,11 @@ grenade=obj {
    use=function(s,w)
       if w==grate then
 	 if here()==crioblock then
+      crioblock._grate=2;
 	    objs(lift):del(w)
 	    ways():add(shaft)
 	 else
+      here()._grate=true;
 	    objs():del(w)
 	    ways():add(techblock)
 	 end
@@ -152,6 +175,7 @@ lift=obj{
 	 s._seen=1
       elseif s._seen==1 then
 	 s._seen=2
+   crioblock._grate=1;
 	 put(grate,s)
 	 v=v..' Рядом с лифтом я заметил вентиляционное отверстие.'
       end
@@ -170,7 +194,10 @@ grate=obj{
    act='Металлическая решётка.',
 }
 shaft=room{
-   nam='Шахта',
+   nam='Шахта',_grate=false,
+   pxa = {
+    { if_("shaft._grate", "shaft_open", "shaft"), 217 }
+   },
    dsc='Я нахожусь на дне вентиляционной шахты.',
    enter=function(s)
       if not s._seen then
@@ -183,6 +210,12 @@ shaft=room{
 techblock=room{
    nam='Технический блок',
    dsc='Технический блок №10.',
+   pxa = {
+    { if_("cell20._opened","door2_open","door2"), 10 },
+    { if_("cell21._opened","door2_open","door2"), 140 },
+    { "toolbox", 300 },
+    { if_("door._opened","door1_open","door1"), 370 }
+   },
    exit=function()
       if not sparehand._not then
 	 if have(hand) then
@@ -307,6 +340,11 @@ door=obj{
 }
 deck=room{
    nam='Главная палуба',
+   pxa = {
+      { "door2", 189 },
+      { "window", 125 },
+      { "window", 351 }
+   },
    dsc='Я нахожусь на главной палубе.',
    obj={'mainlift'},
    way={'techblock'},
@@ -325,6 +363,9 @@ mainlift=obj{
 }
 liftinside=room{
    nam='Главный лифт',
+   pxa = {
+      { "door2", 189 }
+   },
    dsc='Я нахожусь внутри главного лифта.',
    obj={'liftbuttons'},
    way={'deck'},
@@ -358,6 +399,12 @@ liftbuttons=obj{
 }
 warehouse=room{
    nam='Склад',
+   pxa = {
+    { "box", 10 },
+    { "box", 100 },
+    { "door3", 250 },
+    { "shelf", 415 }
+   },
    dsc='Я нахожусь в гигантском помещении склада.',
    obj={'boxes'},
    way={'liftinside'},
@@ -405,6 +452,11 @@ sparehand=obj{
 }
 sparecrioblock=room{
    nam='Резервный криоблок',
+   pxa = {
+    { "door3", 10 },
+    { "window", 180 },
+    { "crio", 300 }
+   },
    dsc='Я нахожусь в резервном криоблоке.',
    obj={'sparecapsule','sparecabinet'},
    way={'liftinside'},
@@ -480,6 +532,9 @@ wakeup=room {
 }
 e_cell21=room{
    nam='Отсек №21',
+   pxa = {
+    { "door1", 189 }
+   },
    dsc='Я нахожусь в отсеке №21.',
    way={'techblock'},
 }
