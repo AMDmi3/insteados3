@@ -1,6 +1,7 @@
 -- $Name: Долгая служба$
 -- $Version: 0.1$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -35,6 +36,12 @@ main = room {
 
 sylo = room {
    nam = "Хранилище"
+  ,pxa = {
+    { "door3", 150 }, 
+    { if_("not have(box1) and not box1._done", "box"), 40 },
+    { "box2", 320 },
+    { "shelf", 415 }
+  }
   ,exit= function(s)
      if not box1._done then
        p "Надо сначала составить все эти ящики.";
@@ -159,6 +166,13 @@ key = obj {
 
 coridor = room {
    nam = "Коридор"
+  ,pxa = {
+    { "door2", 30 }, 
+    { "window", 170 },
+    { "window", 240 },
+    { "window", 310 },
+    { if_("not sylo2._open", "door1", "door1_open"), 370 }, 
+  }
   ,enter= function(s)
     if not ear._done then
       ear._done = true;
@@ -219,6 +233,7 @@ hand = obj {
 
 elevator = room {
    nam = "Лифт"
+  ,pxa = { { "door2", 190 } }
   ,enter= function(s)
     if not hand._done then
       hand._done = true;
@@ -250,6 +265,13 @@ leg = obj {
 sylo2 = room {
    _open= false
   ,nam  = "Продовольственный отсек"
+  ,pxa = {
+    { if_("robothand._done and not hand._fix", "robot_nohand", "robot"), 40 },
+    { "panel", 180 },
+    { "box", 170 },
+    { "box", 250 },
+    { "shelf", 415 }
+  }
   ,enter= function(s)
     if not hand._done then
       p "Нет, мне надо идти к главному инженеру."
@@ -307,6 +329,7 @@ end
 
 sylocode = room {
    _code = ""
+  ,pxa = { { if_("not sylo2._open", "door1", "door1_open"), 190 } }
   ,nam = "У двери"
   ,dsc = "Я стою у двери в продовольственный отсек. Какие там звуки издавал тот робот? Пип, пап, пап... Нет, как-то не так. Он издавал..."
   ,obj = { "pip", "pap" }

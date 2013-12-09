@@ -1,6 +1,7 @@
 -- $Name: Вахта$
 -- $Version: 0.2$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -62,6 +63,7 @@ act=function()walk(cabin1)end
 
 cabin1 = room {
 nam = "Отсек WR005",_closed=false,
+pxa = { { if_("cabin1._closed", "door1", "door1_open"), 190 } },
 enter=function(s)
 if s._closed then
 p "Дверь в мой отсек закрыта. Надо будет потом придумать, как её снова открыть. Но на этом у меня есть целый год.";
@@ -105,6 +107,12 @@ cabin1_door=obj {
 
 block = room {
 nam = "Технический блок",
+pxa = {
+  { "toolbox", 440},
+  { if_("cabin1._closed", "door1", "door1_open"), 10 },
+  { if_("cabin1._closed", "door1_open", "door1"), 150 },
+  { "door3", 300 },
+},
 dsc = "Технический блок №2. Здесь есть два отсека для вахтенных роботов и большая толстая дверь в коридор, который ведёт на главную палубу.",
 obj = {"blockbutton","toolbox","key","tube"},
 way = {"cabin1","cabin2",vroom("Коридор","endgame1")}
@@ -168,6 +176,10 @@ end
 
 cabin2=room {
 nam = "Отсек WR006",
+pxa = {
+  { "door1_open", 80 },
+  { if_("main._hand", "robot_nohand", "robot"), 220 }
+},
 enter = function(s)
 if not cabin1._closed then
 p "Дверь в отсек WR006 закрыта. Она откроется только, когда будет закрыта дверь в мой отсек. Вот так здесь всё устроено.";return false;
@@ -198,7 +210,7 @@ else
 timer:set(4000)
 end
 end,
-dsc=txtc("^^^^^^^^^^^^^^Прошло сто лет..."),
+dsc=txtc("Прошло сто лет..."),
 timer=function()timer:stop();walk(endgame2)end
 }
 

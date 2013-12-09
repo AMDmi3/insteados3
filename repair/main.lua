@@ -1,6 +1,7 @@
 -- $Name: Ремонт$
 -- $Version: 0.1$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -36,6 +37,14 @@ main = room {
 crio = room {
    _done = false
   ,nam = "К007"
+  ,pxa = if_("not darkness:cnd()",
+    {
+      { "door3", 5 }, 
+      { "panel", 150 },
+      { "toolbox", 220 },
+      { "crio", 290 },
+      { "crio", 420 }
+    })
   ,dsc = "Я в криоблоке К007."
   ,obj = { "darkness", "capsulas", "cinfo", "toolbox", "screw", "flash", "powerbox", "switch" }
   ,way = { vroom("Коридор","endgame") }
@@ -199,6 +208,7 @@ flash = obj {
 
 electro = room {
    nam = "Щиток"
+  ,pxa = { { if_("not nosee:cnd()", "panel"), 215 } }
   ,exit = function(s)
     remove(green,me());
     remove(blue,me());
