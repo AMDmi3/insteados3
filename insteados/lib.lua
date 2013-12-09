@@ -88,6 +88,10 @@ function room(r)
             y = 55;
           elseif vv == "mutant" then
             y = 28;
+          elseif vv == "med" then
+            y = 60;
+          elseif vv == "zombi" then
+            y = 75;
           end
           sprite.copy(spr, game.cache, v[2], y);
           sprite.free(spr);

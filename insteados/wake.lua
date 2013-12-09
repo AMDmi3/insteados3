@@ -1,5 +1,6 @@
 -- $Name: Пробуждение$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
@@ -18,6 +19,11 @@ main = room {
 
 room1 = room {
   nam = "К007",
+  pxa = {
+    { "crio", 10 },
+    { "med", 310 },
+    { "door1", 370 }
+  },
   enter = function() 
     if room1_neibor._zombi then
       p "Нет, туда пути больше нет.";
@@ -96,6 +102,11 @@ adrenalin = obj {
 
 coridor = room {
   nam = "Коридор",
+  pxa = {
+    { if_("armoryobj._open","door1_open","door1"), 10 },
+    { "door2", 200 },
+    { if_("not zombi._dead","zombi"), 420 }
+  },
   enter = function()
     if not room1_neibor._zombi then
       p "Надо бы сначала помочь Александру.";
@@ -130,7 +141,7 @@ lock = obj {
   dsc = "На стене у двери в К007 висит {панель} электронного замка.",
   act = function(s)
     if zombi._dead then
-      return "Замок разворачен выстрелом.";
+      return "Замок разворочен выстрелом.";
     else
       return "Александр уже вышел из комнаты, я не смогу его там закрыть.";
     end
@@ -208,6 +219,12 @@ codereader = obj {
 
 armory = room {
   nam = "Оружейная",
+  pxa = {
+    { "door1_open", 10 },
+    { "box", 180 },
+    { "box", 280 },
+    { "box", 380 },
+  },
   enter = function(s)
     if not armoryobj._open then
       p "Дверь в оружейшую закрыта.";
