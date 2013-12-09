@@ -65,7 +65,7 @@ virtual_store = room {
 store = room {
 	nam = "Склад",
 	dsc = "Склад продуктов, которые нельзя просто так синтезировать.",
-	obj = {"malt", "yeast", "rat"},
+	obj = {"malt", "yeast", "rat", "destructor"},
 	way = {"elevator"},
 	exit = function (s, w)
 		if have("destructor") then
@@ -91,11 +91,27 @@ ingridients = obj {
 }
 
 mixer = obj {
-	var {content = {}},
+	var {content = 0, pattern = "Позиция напралена на склад. Паттерн записан."},
 	act = function (s)
-		
-		s.content = {};
-		return "Заглушка";
+		if s.content == 0 then
+			s.content = 0;
+			return "Миксер пуст.";
+		elseif s.content == 19 then
+			s.content = 0;
+			return "Фруктовый салат готов. "..s.pattern;
+		elseif s.content == 28 then
+			s.content = 0;
+			return "Пиво готово. "..s.pattern;
+		elseif s.content == 64 then
+			s.content = 0;
+			return "Нагревательный элемент отсутствует. Миксер очищен.";
+		elseif s.content == 96 then
+			s.content = 0;
+			return "Жареный картофель готов. "..s.pattern;
+		else
+			s.content = 0;
+			return "Отвратительная смесь приготовлена и отправлена на переработку.";
+		end;
 	end,
 	nam = "Миксер",
 	dsc = "{Миксер}^",
