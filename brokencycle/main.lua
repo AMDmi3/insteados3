@@ -1,30 +1,24 @@
 --$Name: Разорванный цикл$
 --$Version: 1.0$
 --$Author: Андрей Лобанов
-
 instead_version "1.9.1"
-
 require "para"
 require "dash"
 require "quotes"
 require "timer"
 require "xact"
-
 game.use='Не получается.'
-
 main=room{
    nam='Капсула',
    dsc='Сознание вернулось. А в месте с ним вернулись мрак и холод.',
    act=code 'walk(capsule)',
    obj={vobj('', '{Открыть глаза}')},
 }
-
 capsule=room{
    nam='Капсула',
    dsc='Я нахожусь в капсуле криосна.',
    obj={'capsule_cap'},
 }
-
 capsule_cap=obj{
    _seen=false,
    nam='Крышка',
@@ -39,16 +33,17 @@ capsule_cap=obj{
       end
    end,
 }
-
 button=obj{
    nam='Кнопка',
    dsc='Рядом находистя {кнопка}.',
    act=function()
-      ways():add(k007)
-      return 'Я нажал на кнопку и крышка плавно отъехала в сторону.'
+      if not path(k007) then
+	 ways():add(k007)
+	 return 'Я нажал на кнопку и крышка плавно отъехала в сторону.'
+      else
+	 return 'Крышка уже открыта.'
    end,
 }
-
 k007=room{
    nam='K007',
    dsc='Тёмный отсек.',
@@ -61,26 +56,22 @@ k007=room{
    end,
    way={'capsule','crioblock'},
 }
-
 mcapsule=obj{
    nam='Капсула',
    dsc='Крышка моей {капсулы} открыта.',
    act='Ничего примечательного.',
    obj={'display'},
 }
-
 display=obj{
    nam='Экран',
    dsc='Рядом с открытой крышкой находится {блок} управления криосном.',
    act='На экран выведено сообщение о поломке капсулы. Странно, что вахтенный робот не предпринял никаких действий.',
 }
-
 capsules=obj{
    nam='Капсулы',
    dsc='Вокруг меня пять других {капсул} криосна.',
    act='В каждой капсуле находится человек. Интересно почему я вышел из криосна.'
 }
-
 cabinets=obj{
    nam='Шкафы',
    dsc='Напротив капсул находятся {шкафы} с вещами членов экипажа.',
@@ -88,10 +79,11 @@ cabinets=obj{
       if not have(cloth) then
 	 take(cloth)
 	 return 'Я открыл свой шкаф и взял свою одежду.'
+      else
+	 return 'Шкаф пуст.'
       end
    end,
 }
-
 cloth=obj{
    nam='Одежда',
    inv='Стандартная форма члена экипажа.',
@@ -102,20 +94,17 @@ cloth=obj{
       end
    end,
 }
-
 cabinet=obj{
    nam='Шкаф',
    dsc='{Один} из шкафов сильно повреждён.',
    act='Такое впечатление, что его били чем-то увестистым.',
 }
-
 crioblock=room{
    nam='Криоблок',
    dsc='Коридор едва освещён.',
    obj={'grenade','lift'},
    way={'k007'},
 }
-
 grenade=obj {
    nam='Огнетушитель',
    dsc=function()
@@ -151,7 +140,6 @@ grenade=obj {
       end
    end,
 }
-
 lift=obj{
    nam='Лифт',
    dsc='Двери {лифта} закрыты.',
@@ -169,7 +157,6 @@ lift=obj{
       return v
    end,
 }
-
 grate=obj{
    nam='Решётка',
    dsc=function()
@@ -181,7 +168,6 @@ grate=obj{
    end,
    act='Металлическая решётка.',
 }
-
 shaft=room{
    nam='Шахта',
    dsc='Я нахожусь на дне вентиляционной шахты.',
@@ -193,7 +179,6 @@ shaft=room{
    end,
    obj={'grate'},
 }
-
 techblock=room{
    nam='Технический блок',
    dsc='Технический блок №10.',
@@ -211,7 +196,6 @@ techblock=room{
    obj={'cell20','cell21','box','door'},
    way={'shaft'},
 }
-
 cell21=obj{
    nam='Отсек №21',
    dsc=function(s)
@@ -232,7 +216,6 @@ cell21=obj{
       end
    end,
 }
-
 cell20=obj{
    _opened=true,
    nam='Отсек №20',
@@ -249,13 +232,11 @@ cell20=obj{
    act='Стандартный отсек, в котором робот предывает во время гибернации.',
    obj={'robot','button2'},
 }
-
 button2=obj{
    nam='Кнопка',
    dsc='В отсеке №20 на стене находится большая круглая {кнопка}.',
    act='Если я её нажму, то просто останусь в отсеке с роботом на ближайшие 99 лет.',
 }
-
 robot=obj{
    nam='Робот',
    dsc='В отсеке находится вахтенный {робот}.',
@@ -267,7 +248,6 @@ robot=obj{
       end
    end,
 }
-
 hand=obj{
    nam='Рука робота',
    inv='Стандартная правая рука вахтенного робота. На ней есть универсальный ключ.',
@@ -286,7 +266,6 @@ hand=obj{
       end
    end,
 }
-
 box=obj{
    nam='Ящик',
    dsc='На полу лежит {ящик} с инструментами.',
@@ -299,12 +278,11 @@ box=obj{
       end
    end,
 }
-
 wrench=obj{
    nam='Гаечный ключ',
    inv='Обычный разводной ключ.',
    use=function(s,w)
-      if w==robot and exist(robot,cell21) and not have(hand) then
+      if w==robot and exist(robot,cell21) and not have(hand) and not path(deck) then
 	 take(hand)
 	 return 'Я открутил правую руку у робота WR021.'
       elseif w == box then
@@ -315,7 +293,6 @@ wrench=obj{
       end
    end,
 }
-
 door=obj{
    nam='Дверь',
    dsc='Большая {дверь}, ведущая на главную палубу, находится напротив отсеков с роботами.',
@@ -327,14 +304,12 @@ door=obj{
       end
    end,
 }
-
 deck=room{
    nam='Главная палуба',
    dsc='Я нахожусь на главной палубе.',
    obj={'mainlift'},
    way={'techblock'},
 }
-
 mainlift=obj{
    nam='Лифт',
    dsc='Здесь находятся двери главного {лифта} корабля.',
@@ -347,14 +322,12 @@ mainlift=obj{
       end
    end,
 }
-
 liftinside=room{
    nam='Главный лифт',
    dsc='Я нахожусь внутри главного лифта.',
    obj={'liftbuttons'},
    way={'deck'},
 }
-
 liftbuttons=obj{
    nam='Кнопки',
    dsc='На стене лифта находятся {кнопки}.',
@@ -382,14 +355,12 @@ liftbuttons=obj{
       end
    end,
 }
-
 warehouse=room{
    nam='Склад',
    dsc='Я нахожусь в гигантском помещении склада.',
    obj={'boxes'},
    way={'liftinside'},
 }
-
 boxes=obj{
    _look=0,
    nam='Ящики',
@@ -413,7 +384,6 @@ boxes=obj{
       end
    end,
 }
-
 sparehand=obj{
    nam='Запасная рука',
    dsc='Рядом с дверью отсека №20 лежит запасная правая {рука} робота.',
@@ -428,18 +398,16 @@ sparehand=obj{
    use=function(s,w)
       if w==cell20 and not s._not then
 	 drop(s,cell20)
-	 return 'Я положил запасную руку рядом с дверью отсека №20.'
+	 return 'Я положил запасную руку рядом с дверью отсека №20. Теперь можно отправляться в резервный криоблок.'
       end
    end,
 }
-
 sparecrioblock=room{
    nam='Резервный криоблок',
    dsc='Я нахожусь в резервном криоблоке.',
    obj={'sparecapsule','sparecabinet'},
    way={'liftinside'},
 }
-
 sparecapsule=obj{
    nam='Капсулы',
    dsc='Здесь находятся резервные {капсулы} для криосна.',
@@ -451,13 +419,11 @@ sparecapsule=obj{
       end
    end,
 }
-
 sparecabinet=obj{
    nam='Шкаф',
    dsc='Напротив капсул стоят {шкафы}.',
    act='Обычные металлические шкафы для личных вещей.',
 }
-
 last=room{
    nam='Резервный криоблок',
    dsc='Напоследок, оглядев криоблок, я закрыл капсулу и погрузился в долгий сон, наполненный виртуальной жизнью...',
@@ -466,7 +432,6 @@ last=room{
    end,
    obj={vobj('next','{Далее}')},
 }
-
 epilogue=room{
    nam="Отсек №21",
    dsc='Я -- вахтенный робот WR020. Раз в сто лет я выхожу из режима гибернации и несу на корабле вахту на протяжении года, а потом снова отключаюсь. Куда корабль летит я не знаю -- этого нет в моих банках памяти. Но я знаю, что весь экипаж в глубокой криозаморозке.^^И вот вновь настала моя очередь дежурить. Я включаюсь...',
@@ -483,7 +448,6 @@ epilogue=room{
    end,
    obj={vobj('next', '{Далее}')}
 }
-
 wakeup=room {
    nam="Пробуждение",_s=1,_f=0,
    dsc=function(s) return s._dsc end,
@@ -513,13 +477,11 @@ wakeup=room {
    diags={"Банки памяти","Центральный процессор","Зрительные окуляры","Моторика"},
    obj ={xact("diag",code[[timer:set(500)]])}
 }
-
 e_cell21=room{
    nam='Отсек №21',
    dsc='Я нахожусь в отсеке №21.',
    way={'techblock'},
 }
-
 hend=room{
    nam='Конец',
    dsc='Я прикрутил руку и спокойно начал нести свою вахту.',
