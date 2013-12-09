@@ -37,27 +37,35 @@ function room(r)
       local px = sprite.load("gfx/pic.jpg");
       for _,v in ipairs(pxa) do
         local vv = tc(v[1],s);
-        local spr = sprite.load("gfx/"..vv..".jpg");
-        local y = 0;
-        if vv == "panel" then
-          y = 70;
-        elseif vv == "door1" or vv == "door1_open" then
-          y = 34;
-        elseif vv == "door2" then
-          y = 60;
-        elseif vv == "door3" then
-          y = 59;
-        elseif vv == "window" then
-          y = 70;
-        elseif vv == "toolbox" then
-          y = 171;
-        elseif vv == "crio" then
-          y = 44;
-        elseif vv == "robot" or vv == "robot_nohand" then
-          y = 70;
+        if vv ~= nil then
+          local spr = sprite.load("gfx/"..vv..".jpg");
+          local y = 0;
+          if vv == "panel" then
+            y = 60;
+          elseif vv == "door1" or vv == "door1_open" then
+            y = 34;
+          elseif vv == "door2" then
+            y = 60;
+          elseif vv == "door3" then
+            y = 59;
+          elseif vv == "window" then
+            y = 70;
+          elseif vv == "toolbox" then
+            y = 171;
+          elseif vv == "crio" then
+            y = 44;
+          elseif vv == "robot" or vv == "robot_nohand" then
+            y = 70;
+          elseif vv == "box" then
+            y = 145;
+          elseif vv == "shelf" then
+            y = 60;
+          elseif vv == "box2" then
+            y = 50;
+          end
+          sprite.copy(spr, px, v[2], y);
+          sprite.free(spr);
         end
-        sprite.copy(spr, px, v[2], y);
-        sprite.free(spr);
       end
       return px;
     end

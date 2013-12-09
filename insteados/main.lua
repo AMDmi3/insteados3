@@ -11,13 +11,12 @@ require "xact"
 main = room {
    nam = "ИНСТЕДОЗ 3"
   ,act = function(s,v)
-    local fn = nil;
-    if v == "watch" then
-      fn = gamefile_("watch.lua");
-    end
+    local fn = gamefile_(v..".lua");
     fn();
    end
   ,obj = {
-    vobj("watch", [[{"Вахта"} Василий Воронков]])
+    vobj("watch", [[{"Вахта"} Василий Воронков^]]),
+    vobj("longwork", [[{"Долгая служба"} Василий Воронков^]]),
+    vobj("repair", [[{"Ремонт"} Василий Воронков^]])
   }
 }
