@@ -142,7 +142,7 @@ mixer = obj {
 separator = obj {
 	nam = "Сепаратор",
 	dsc = "{Молекулярный сепаратор}^",
-    acr = "Сепарируй и заливай.",
+    act = "Сепарируй и заливай.",
 }
 
 todo = obj {
@@ -321,7 +321,7 @@ rat = obj {
         else
             state = "не поджарена.";
         end
-        return "В углу сидит бесстрашная {тощая тварь}. Она "..state.."^";
+        return "В углу сидит бесстрашная {жирная тварь}. Она "..state.."^";
     end,
 	act = function (s)
 		if not have("rat") then
