@@ -66,6 +66,10 @@ wake = chapter {
   nam = "7. Пробуждение"
 }
 
+cook = chapter {
+  nam = "8. Подготовка к вечеринке"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -77,4 +81,5 @@ function init()
   take(brokencycle);
   take(meteor);
   take(wake);
+  take(cook);
 end
