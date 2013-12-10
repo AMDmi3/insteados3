@@ -56,7 +56,7 @@ function()
         y = 171;
       elseif vv == "crio" then
         y = 45;
-      elseif vv == "robot" or vv == "robot_nohand" then
+      elseif vv == "robot" or vv == "robot_nohand" or vv == "robot_cargo" then
         y = 75;
       elseif vv == "box" then
         y = 145;

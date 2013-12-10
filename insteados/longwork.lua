@@ -168,7 +168,7 @@ coridor = room {
    nam = "Коридор"
   ,pxa = {
     { "door4", 30 }, 
-    { "window", 240 },
+    { if_("not robot._done", "robot_cargo"), 240 },
     { if_("not sylo2._open", "door1", "door1_open"), 370 }, 
   }
   ,enter= function(s)
