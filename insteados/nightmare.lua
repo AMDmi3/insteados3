@@ -288,11 +288,11 @@ devices = obj {
 coridor = room {
    _wait = 0
   ,nam = "Коридор"
-  ,enter2 = function(s)
+  ,enter = function(s)
     if not hall:done() then
       p "Нет, пока я ещё не всё закончил. Пип-пип!";
       return false;
-    elseif not hall._call then
+    elseif hall:done() and not hall._call then
       p "Надо сначала пригласить в банкетный зал людей. Пип-пип!";
       return false;
     end
