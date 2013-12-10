@@ -382,6 +382,11 @@ rat = obj {
 		end;
 	end,
 	inv = function (s) 
+		if s._fired then
+            state = "поджарена.";
+        else
+            state = "не поджарена.";
+        end
 		return "Если тыкнуть крысу, она запищит. Отпускать её однозначно не стоит. Тем более, что тварь "..s.state; 
 	end,
 }
