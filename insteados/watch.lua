@@ -109,9 +109,9 @@ block = room {
 nam = "Технический блок",
 pxa = {
   { "toolbox", 440},
-  { if_("cabin1._closed", "door1", "door1_open"), 10 },
-  { if_("cabin1._closed", "door1_open", "door1"), 150 },
-  { "door3", 300 },
+  { if_("cabin1._closed", "door4", "door2_open"), 10 },
+  { if_("cabin1._closed", "door2_open", "door4"), 150 },
+  { "door1", 300 },
 },
 dsc = "Технический блок №2. Здесь есть два отсека для вахтенных роботов и большая толстая дверь в коридор, который ведёт на главную палубу.",
 obj = {"blockbutton","toolbox","key","tube"},

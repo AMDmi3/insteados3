@@ -74,6 +74,10 @@ engineer = chapter {
   nam = "9. Инженер"
 }
 
+nightmare = chapter {
+  nam = "10. Ночной кошмар"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -87,4 +91,5 @@ function init()
   take(wake);
   take(cook);
   take(engineer);
+  take(nightmare);
 end

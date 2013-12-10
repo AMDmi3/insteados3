@@ -167,10 +167,8 @@ key = obj {
 coridor = room {
    nam = "Коридор"
   ,pxa = {
-    { "door2", 30 }, 
-    { "window", 170 },
+    { "door4", 30 }, 
     { "window", 240 },
-    { "window", 310 },
     { if_("not sylo2._open", "door1", "door1_open"), 370 }, 
   }
   ,enter= function(s)
