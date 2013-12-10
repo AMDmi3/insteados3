@@ -70,6 +70,10 @@ cook = chapter {
   nam = "8. Подготовка к вечеринке"
 }
 
+engineer = chapter {
+  nam = "9. Инженер"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -82,4 +86,5 @@ function init()
   take(meteor);
   take(wake);
   take(cook);
+  take(engineer);
 end
