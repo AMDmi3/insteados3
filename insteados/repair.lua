@@ -39,7 +39,7 @@ crio = room {
   ,nam = "К007"
   ,pxa = if_("not darkness:cnd()",
     {
-      { "door3", 5 }, 
+      { "door4", 5 }, 
       { "panel", 150 },
       { "toolbox", 220 },
       { "crio", 290 },

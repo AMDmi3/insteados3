@@ -195,7 +195,7 @@ loc7 = room {
   pxa = {
     { if_("q2==0","door1","door1_open"), 10 },
     { "shaft", 250 },
-    { "robot_nohand", 395 }
+    { if_("have(blaster)", "robot_nohand", "robot_nohand_blaster"), 395 }
   };
 	obj = {door1, robo1,
 	vway("_", [[Небольшой проход уводит {вправо}.]], 'loc8'),	
@@ -208,9 +208,9 @@ loc7 = room {
 loc8 = room {
 	nam = "Коридор. Сектор B";
   pxa = {
-    { "door2", 60 },
+    { "door4", 60 },
     { "blood", 200 },
-    { "door2", 310 }
+    { "door4", 310 }
   };
 	obj = {
 	vway("_", [[Пол испачкан кровью. След тянется из отсека {К613}]], 'loc9'),	
@@ -253,7 +253,7 @@ loc9 = room {
   pxa = {
     { "door2", 10 },
     { "panel", 210 },
-    { "crio", 300 }
+    { "crio_blood", 300 }
   };
 	obj = {cap1,key,
 	vway("_", [[Можно вернуться в {коридор}.]], 'loc8'),	
@@ -299,8 +299,7 @@ loc10 = room {
 	nam = "Ремонтный отсек";
   pxa = {
     { "door1_open", 10 },
-    { "box", 160 },
-    { "box", 250 },
+    { if_("q5==1","repair_broken", "repair_meteor"), 190 },
     { "window", 390 }
   };
 	obj = {glass3, repair,
@@ -374,9 +373,9 @@ end2 = room {
 loc12 = room {
 	nam = "Коридор. Сектор B";
   pxa = {
-    { "door2", 60 },
+    { "door4", 60 },
     { "blood", 200 },
-    { "door2", 310 }
+    { "door4", 310 }
   };
 	obj = {vway("a1", [[Мутант замечает робота и бросается в погоню. 
 	Стараясь увести монстра как можно дальше от криокапсул, робот возвращается в свой отсек. 

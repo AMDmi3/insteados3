@@ -346,7 +346,7 @@ ex = R {
 out = R {
 	nam = 'Криоблок';
   pxa = {
-    { "door1", 50 },
+    { "door4", 50 },
     { "box3", 380 }
   },
 	dsc = [[Я в коридоре криоблока корабля.]];
@@ -371,8 +371,8 @@ r7 = R {
 	end;
 	nam = 'К007';
   pxa = {
-    { "door1", 10 },
-    { "panel", 220 },
+    { "door4", 10 },
+    { if_("not blast._s","panel","panel_broken"), 220 },
     { if_("exist(rat)","rat"), 180 },
     { "crio", 300 }
   };
@@ -386,6 +386,9 @@ p2 = room {
 	_s = 1;
 	forcedsc = true;
 	hideinv = true;
+  pxa = {
+    { if_("p2._s<5", "rat"), 220 }
+  };
 	dscs = { 
 	    "Ну, уж на этот раз я не промахнусь!",
 	    "...",

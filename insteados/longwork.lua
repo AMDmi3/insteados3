@@ -37,7 +37,7 @@ main = room {
 sylo = room {
    nam = "Хранилище"
   ,pxa = {
-    { "door3", 150 }, 
+    { "door4", 150 }, 
     { if_("not have(box1) and not box1._done", "box"), 40 },
     { "box2", 320 },
     { "shelf", 415 }

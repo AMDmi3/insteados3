@@ -22,7 +22,7 @@ room1 = room {
   pxa = {
     { "crio", 10 },
     { "med", 310 },
-    { "door1", 370 }
+    { "door4", 370 }
   },
   enter = function() 
     if room1_neibor._zombi then
@@ -105,7 +105,8 @@ coridor = room {
   pxa = {
     { if_("armoryobj._open","door1_open","door1"), 10 },
     { "door2", 200 },
-    { if_("not zombi._dead","zombi"), 420 }
+    { if_("not zombi._dead","zombi", "zombi_dead"), if_("not zombi._dead", 420, 380) },
+    { if_("not zombi._dead","hatch2", "hatch"), 460 }
   },
   enter = function()
     if not room1_neibor._zombi then
@@ -221,6 +222,8 @@ armory = room {
   nam = "Оружейная",
   pxa = {
     { "door1_open", 10 },
+    { if_("not have(knife)", "knife"), 150 },
+    { if_("not have(blaster)","blaster"), 180 },
     { "box", 180 },
     { "box", 280 },
     { "box", 380 },
@@ -241,7 +244,7 @@ armory = room {
 
 blaster = obj {
   nam = "Бластер",
-  dsc = "Чуть дальше лежит {бластер}.",
+  dsc = "Чуть дальше висит {бластер}.",
   tak = "Я взял бластер.",
   use = function(s,v)
     if v==zombi then
@@ -257,7 +260,7 @@ blaster = obj {
 
 knife = obj {
   nam = "Нож",
-  dsc = "На ближайшей ко мне полке лежит {нож-пила}.",
+  dsc = "У двери висит {нож-пила}.",
   tak = "Я беру нож-пилу.",
   use = function(s,v)
     if v==zombi then

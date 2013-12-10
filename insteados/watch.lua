@@ -63,7 +63,7 @@ act=function()walk(cabin1)end
 
 cabin1 = room {
 nam = "Отсек WR005",_closed=false,
-pxa = { { if_("cabin1._closed", "door1", "door1_open"), 190 } },
+pxa = { { if_("cabin1._closed", "door4", "door2_open"), 190 } },
 enter=function(s)
 if s._closed then
 p "Дверь в мой отсек закрыта. Надо будет потом придумать, как её снова открыть. Но на этом у меня есть целый год.";

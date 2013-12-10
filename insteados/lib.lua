@@ -44,7 +44,7 @@ function()
     if vv ~= nil then
       local spr = sprite.load("gfx/"..vv..".png");
       local y = 0;
-      if vv == "panel" then
+      if vv == "panel" or vv == "panel_broken" then
         y = 60;
       elseif vv == "door1" or vv == "door1_open" then
         y = 35;
@@ -54,9 +54,9 @@ function()
         y = 62;
       elseif vv == "toolbox" then
         y = 171;
-      elseif vv == "crio" then
+      elseif vv == "crio" or vv == "crio_blood" then
         y = 45;
-      elseif vv == "robot" or vv == "robot_nohand" or vv == "robot_cargo" then
+      elseif vv == "robot" or vv == "robot_nohand" or vv == "robot_nohand_blaster" or vv == "robot_cargo" then
         y = 75;
       elseif vv == "box" then
         y = 145;
@@ -96,10 +96,16 @@ function()
         y = 80;
       elseif vv == "table" then
         y = 110;
+      elseif vv == "zombi_dead" then
+        y = 145;
+      elseif vv == "blaster" or vv == "knife" then
+        y = 40;
       elseif vv == "vase_flower" or vv == "vase" then
         y = 70;
+      elseif vv == "repair" or vv == "repair_broken" or vv == "repair_meteor" then
+        y = 95;
       end
-      sprite.copy(spr, game.cache, v[2], y);
+      sprite.compose(spr, game.cache, tc(v[2],s), y);
       sprite.free(spr);
     end
   end
