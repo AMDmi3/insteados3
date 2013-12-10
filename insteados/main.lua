@@ -75,7 +75,7 @@ engineer = chapter {
 }
 
 nightmare = chapter {
-  nam = "10. Ночной кошмар"
+  nam = "10. Банкет"
 }
 
 function init()
