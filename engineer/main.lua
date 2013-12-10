@@ -13,9 +13,9 @@ forcedsc = true;
 
 global {
 	sc = 0;
-	Oxigen = 10;
+	Oxigen = 12;
 	vc = 0;
-	bolt = 9;
+	bolt = 11;
 	q = 0;
 };
 

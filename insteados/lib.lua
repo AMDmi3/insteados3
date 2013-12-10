@@ -60,9 +60,7 @@ function room(r)
             y = 60;
           elseif vv == "door1" or vv == "door1_open" then
             y = 35;
-          elseif vv == "door2" or vv == "door2_open" then
-            y = 60;
-          elseif vv == "door3" then
+          elseif vv == "door2" or vv == "door3" or vv == "door4" or vv == "door2_open" then
             y = 60;
           elseif vv == "window" then
             y = 62;
@@ -80,6 +78,8 @@ function room(r)
             y = 50;
           elseif vv == "rat" then
             y = 135;
+          elseif vv == "rat_dead" then
+            y = 100;
           elseif vv == "box3" then
             y = 110;
           elseif vv == "blood" then
@@ -92,6 +92,10 @@ function room(r)
             y = 60;
           elseif vv == "zombi" then
             y = 75;
+          elseif vv == "device" then
+            y = 65;
+          elseif vv == "bfg" then
+            y = 40;
           end
           sprite.copy(spr, game.cache, v[2], y);
           sprite.free(spr);
