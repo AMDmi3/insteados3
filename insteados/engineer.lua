@@ -1,6 +1,7 @@
 -- $Name: Инженер$
 -- $Version: 0.1$
 instead_version "1.9.1"
+dofile "lib.lua"
 require "para";
 require "dash";
 require "quotes";
@@ -13,9 +14,9 @@ forcedsc = true;
 
 global {
 	sc = 0;
-	Oxigen = 10;
+	Oxigen = 12;
 	vc = 0;
-	bolt = 9;
+	bolt = 11;
 	q = 0;
 };
 
@@ -27,11 +28,19 @@ main = room {
 
 cabin = room {
 	nam = 'Криокамерный отсек';
+  pxa = {
+    { "crio", 300 }
+  };
 	dsc = 'Через некоторое время он смог подняться с пола, хватаясь за стенку непослушными руками. Что-то в подсознании не дало ему просто лежать дальше. Упершись лбом в стенку он решил немного отдышаться. В полированной металлической стенке отражался слегка небритый худощавый субъект в спецовке. На кармане желтела {xwalk(stripe)|какая-то нашивка}.';
 };
 
 stripe = room {
 	nam = 'Криокамерный отсек';
+  pxa = {
+    { if_("vc==1","door1_open","door1"), 10 },
+    { "panel", 150 },
+    { "crio", 300 }
+  };
 	enter = function()
 		if visits() == 0 then p '"Вереск" -- было написано на нашивке. На этот раз чтение уже не стало проблемой как раньше.^-- Это нормально после криосна. -- откуда-то пришла мысль. Остальная память пока не отвечала, но возвращение своего имени уже приободрило его. Он оглянулся.';
 		end;
@@ -153,6 +162,9 @@ vsuit = obj {
 
 crio_dlg = dlg {
 	nam = 'Гермодверь';
+  pxa = {
+    { "panel", 217 }
+  };
 	enter = function()
 		p 'Мигающий красный индикатор предупреждает об отсутствии атмосферы за дверью.';
 		if vc == 0 then pon 'open';
@@ -197,6 +209,11 @@ status = stat {
 
 deck = room {
 	nam = 'Палуба';
+  pxa = {
+    { "window", 100 },
+    { "door1_open", 190 },
+    { "window", 380 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -206,6 +223,11 @@ deck = room {
 
 left = room {
 	nam = 'Палуба';
+  pxa = {
+    { "hatch", 20 },
+    { "hole", 60 },
+    { "window", 400 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -216,6 +238,11 @@ left = room {
 
 right = room {
 	nam = 'Палуба';
+  pxa = {
+    { if_("exist(door)","door1","door1_open"), 10 },
+    { "window", 140 },
+    { "hatch", 400 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -254,6 +281,9 @@ hole = obj {
 
 cover = room {
 	nam = 'Обшивка';
+  pxa = {
+    { "hole2", 50 }
+  };
 	enter = function()
 		Ox();
 		if have 'ballon' then Oxigen = Oxigen - 2;
@@ -266,6 +296,9 @@ cover = room {
 
 cover2 = room {
 	nam = 'Обшивка';
+  pxa = {
+    { "hole2", 300 }
+  };
 	enter = function()
 		Ox();
 		if have 'ballon' then Oxigen = Oxigen - 1;
@@ -286,6 +319,11 @@ end;
 
 cabin2 = room {
 	nam = 'Отсек';
+  pxa = {
+    { "door1_open", 10 },
+    { "panel", 150 },
+    { "crio", 300 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -310,6 +348,11 @@ case2 = obj {
 
 deck2 = room {
 	nam = 'Палуба';
+  pxa = {
+    { "window", 100 },
+    { "door1_open", 190 },
+    { "window", 380 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -319,6 +362,11 @@ deck2 = room {
 
 left2 = room {
 	nam = 'Палуба';
+  pxa = {
+    { "hatch", 50 },
+    { "window", 120 },
+    { "window", 420 }
+  };
 	enter = function()
 		Ox();
 	end;
@@ -328,6 +376,11 @@ left2 = room {
 
 right2 = room {
 	nam = 'Палуба';
+  pxa = {
+    { "hatch", 50 },
+    { "window", 120 },
+    { "window", 420 }
+  };
 	enter = function()
 		Ox();
 	end;

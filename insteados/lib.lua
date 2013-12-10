@@ -96,6 +96,10 @@ function room(r)
             y = 65;
           elseif vv == "bfg" then
             y = 40;
+          elseif vv == "hole" then
+            y = 65;
+          elseif vv == "hole2" then
+            y = 35;
           end
           sprite.copy(spr, game.cache, v[2], y);
           sprite.free(spr);
