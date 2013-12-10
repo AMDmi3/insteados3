@@ -94,7 +94,7 @@ store = room {
   pxa = {
     { "door2", 10 },
     { if_("exist(destructor)", "bfg"), 140 },
-    { if_("exist(rat)","rat"), 330 },
+    { if_("exist(rat)",if_("rat._fired","rat_dead","rat")), 330 },
     { "box", 400 }
   },
 	dsc = "Склад продуктов, которые нельзя просто так синтезировать.",
@@ -346,7 +346,7 @@ rat = obj {
 	var {_fired = false},
 	nam = "Крыса",
 	dsc = function(s)
-        state = "";
+        local state = "";
         if s._fired then
             state = "поджарена.";
         else
@@ -382,12 +382,11 @@ rat = obj {
 		end;
 	end,
 	inv = function (s) 
+    local state = "не поджарена.";
 		if s._fired then
             state = "поджарена.";
-        else
-            state = "не поджарена.";
         end
-		return "Если тыкнуть крысу, она запищит. Отпускать её однозначно не стоит. Тем более, что тварь "..s.state; 
+		return "Если тыкнуть крысу, она запищит. Отпускать её однозначно не стоит. Тем более, что тварь "..state; 
 	end,
 }
 
