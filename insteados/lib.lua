@@ -96,6 +96,8 @@ function()
         y = 80;
       elseif vv == "table" then
         y = 110;
+      elseif vv == "extin" then
+        y = 145;
       elseif vv == "zombi_dead" then
         y = 145;
       elseif vv == "blaster" or vv == "knife" then

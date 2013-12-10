@@ -50,7 +50,7 @@ k007=room{
    nam='K007',
    dsc='Тёмный отсек.',
   pxa = {
-    { "door1", 10 },
+    { "door4", 10 },
     { "panel", 220 },
     { "crio", 300 }
   };
@@ -111,6 +111,7 @@ crioblock=room{
    _grate=0,
    pxa = {
     { "box3", 20 },
+    { if_("exist(grenade)","extin"), 90 },
     { "window", 120 },
     { "window", 170 },
     { "window", 220 },
@@ -211,8 +212,8 @@ techblock=room{
    nam='Технический блок',
    dsc='Технический блок №10.',
    pxa = {
-    { if_("cell20._opened","door2_open","door2"), 10 },
-    { if_("cell21._opened","door2_open","door2"), 140 },
+    { if_("cell20._opened","door2_open","door4"), 10 },
+    { if_("cell21._opened","door2_open","door4"), 140 },
     { "toolbox", 300 },
     { if_("door._opened","door1_open","door1"), 370 }
    },
@@ -453,7 +454,7 @@ sparehand=obj{
 sparecrioblock=room{
    nam='Резервный криоблок',
    pxa = {
-    { "door3", 10 },
+    { "door4", 10 },
     { "window", 180 },
     { "crio", 300 }
    },
