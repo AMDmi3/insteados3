@@ -112,9 +112,7 @@ crioblock=room{
    pxa = {
     { "box3", 20 },
     { if_("exist(grenade)","extin"), 90 },
-    { "window", 120 },
     { "window", 170 },
-    { "window", 220 },
     { function(s)
         if s._grate == 1 then
           return "shaft";
@@ -212,7 +210,9 @@ techblock=room{
    nam='Технический блок',
    dsc='Технический блок №10.',
    pxa = {
+    { if_("not _endgame", "robot_nohand"), 47 },
     { if_("cell20._opened","door2_open","door4"), 10 },
+    { if_("have(hand)", "robot_nohand", "robot"), 177 },
     { if_("cell21._opened","door2_open","door4"), 140 },
     { "toolbox", 300 },
     { if_("door._opened","door1_open","door1"), 370 }
@@ -403,7 +403,7 @@ warehouse=room{
    pxa = {
     { "box", 10 },
     { "box", 100 },
-    { "door3", 250 },
+    { "door2", 250 },
     { "shelf", 415 }
    },
    dsc='Я нахожусь в гигантском помещении склада.',
@@ -455,7 +455,7 @@ sparecrioblock=room{
    nam='Резервный криоблок',
    pxa = {
     { "door4", 10 },
-    { "window", 180 },
+    { "panel", 220 },
     { "crio", 300 }
    },
    dsc='Я нахожусь в резервном криоблоке.',
@@ -531,8 +531,10 @@ wakeup=room {
    diags={"Банки памяти","Центральный процессор","Зрительные окуляры","Моторика"},
    obj ={xact("diag",code[[timer:set(500)]])}
 }
+_endgame=false;
 e_cell21=room{
    nam='Отсек №21',
+   enter=function() _endgame=true; end,
    pxa = {
     { "door1", 189 }
    },

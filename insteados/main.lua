@@ -48,8 +48,10 @@ before_About = menu {
 
 before_Credits = menu {
    nam = "Создатели"
-  ,inv = function() walk(credits) end
+  ,inv = function() walk(test) end
 }
+
+test = timerpause(999, 813, "main");
 
 empty = menu { nam = "" }
 

@@ -110,6 +110,7 @@ nam = "Технический блок",
 pxa = {
   { "toolbox", 440},
   { if_("cabin1._closed", "door4", "door2_open"), 10 },
+  { if_("main._hand", "robot_nohand", "robot"), 187 },
   { if_("cabin1._closed", "door2_open", "door4"), 150 },
   { "door1", 300 },
 },
