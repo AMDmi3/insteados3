@@ -472,12 +472,12 @@ hack = R {
 			end
 		elseif s._s == 4 then
 			pr "Addr: <u>"
-			pr ("{a0|", sf("%x", a0._s), "}")
+			pr ("{a0|", sf(" %x", a0._s), "}")
 			pr ("{a1|", sf("%x</u> ", a1._s), "}")
 			pr " Data: [<u>"
-			pr ("{a2|", sf("%x", a2._s), "}")
-			pr ("{a3|", sf("%x", a3._s), "}")
-			pr "</u>]"
+			pr ("{a2|", sf(" %x", a2._s), "}")
+			pr ("{a3|", sf("%x</u> ", a3._s), "}")
+			pr "]"
 		end
 
 	end;
