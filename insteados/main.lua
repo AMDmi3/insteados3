@@ -29,6 +29,7 @@ credits = room {
       ^Дмитрий Дударь ("Пояс астероидов")
       ^Дмитрий Колесников ("Пробуждение")
       ^Егор Харват ("Подготовка к вечеринке")
+      ^Максим Клиш ("Старый друг")
       ^Пётр Косых ("Отсек К007")
       ^Роман "Irreman" ("Инженер")]]
 }
@@ -95,6 +96,10 @@ nightmare = chapter {
   nam = "10. Банкет"
 }
 
+oldfriend = chapter {
+  nam = "11. Старый друг"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -109,4 +114,5 @@ function init()
   take(cook);
   take(engineer);
   take(nightmare);
+  take(oldfriend);
 end
