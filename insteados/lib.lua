@@ -1,5 +1,30 @@
 require "sprites"
 
+local old_snapshot = restore_snapshot;
+function restore_snapshot()
+  if game.cache ~= nil then
+    sprite.free(game.cache);
+    game.cache = nil;
+  end
+  if game.cache2 ~= nil then
+    sprite.free(game.cache2);
+    game.cache2 = nil;
+  end
+  if game.cache_nums ~= nil then
+    for k,v in pairs(game.cache_nums) do
+      sprite.free(v);
+      game.cache_nums[k] = nil;
+    end
+  end
+  if game.cache_sprites ~= nil then
+    for k,v in pairs(game.cache_sprites) do
+      sprite.free(v);
+      game.cache_sprites[k] = nil;
+    end
+  end
+  return old_snapshot();
+end
+
 local old_title = instead.get_title;
 instead.get_title = function()
   local r = old_title();
@@ -39,7 +64,10 @@ function timerpause(snum,enum,next)
     enum = enum - 1;
   else
     enum = enum + 1;
-  end 
+  end
+  if game.cache_nums == nil then
+    game.cache_nums = {}
+  end
   return room {
     enum = enum, sh = sh, snum = snum,
     _cur = snum, _fr=0,
@@ -61,10 +89,10 @@ function timerpause(snum,enum,next)
       return sn;
     end,
     loadnum = function(s,n)
-      if game["cache_"..n] == nil then
-        game["cache_"..n] = sprite.load("gfx/"..n..".png");
+      if game.cache_nums[n] == nil then
+        game.cache_nums[n] = sprite.load("gfx/"..n..".png");
       end
-      return game["cache_"..n];
+      return game.cache_nums[n];
     end,
     draw = function(s,d)
       local d = tostring(d);
@@ -137,20 +165,23 @@ function()
     sprite.copy(pt, game.cache, 0, 0);
     sprite.free(pt);
   end
+  if game.cache_sprites == nil then
+    game.cache_sprites = {};
+  end
   for _,v in ipairs(pxa) do
     local vv = tc(v[1],s);
     if vv ~= nil then
-      local spr = game["sprite_"..vv];
+      local spr = game.cache_sprites[vv];
       if spr == nil then
         spr = sprite.load("gfx/"..vv..".png");
-        game["sprite_"..vv] = spr;
+        game.cache_sprites[vv] = spr;
       end
       local y = 0;
       if vv == "panel" or vv == "panel_broken" then
         y = 60;
       elseif vv == "door1" or vv == "door1_open" then
         y = 35;
-      elseif vv == "door2" or vv == "door3" or vv == "door4" or vv == "door2_open" then
+      elseif vv == "door2" or vv == "door3" or vv == "door4" or vv == "door2_open" or vv == "door5" or vv == "door5_open" then
         y = 60;
       elseif vv == "window" or vv == "window2" then
         y = 62;
@@ -196,10 +227,18 @@ function()
         y = 90;
       elseif vv == "communicator" then
         y = 80;
-      elseif vv == "table" then
+      elseif vv == "table" or vv == "table3" or vv == "table3_keys" then
         y = 110;
       elseif vv == "extin" then
         y = 145;
+      elseif vv == "fridge" then
+        y = 105;
+      elseif vv == "books" then
+        y = 100;
+      elseif vv == "table2" then
+        y = 140;
+      elseif vv == "window3" then
+        y = 70;
       elseif vv == "zombi_dead" then
         y = 145;
       elseif vv == "blaster" or vv == "knife" then
@@ -208,6 +247,12 @@ function()
         y = 70;
       elseif vv == "repair" or vv == "repair_broken" or vv == "repair_meteor" then
         y = 95;
+      elseif vv == "table4" then
+        y = 90;
+      elseif vv == "screen" then
+        y = 50;
+      elseif vv == "chair1" or vv == "chair2" then
+        y = 125;
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);
     end
