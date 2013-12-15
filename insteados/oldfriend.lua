@@ -7,7 +7,6 @@ require "dash"
 require "quotes"
 require "xact" 
 require "hideinv" 
-require "dbg"
 require "snapshots"
 game.act = "Гм.....";
 game.use = "Не сработает";
@@ -194,7 +193,7 @@ mendlg = dlg {
 									Ты  найдешь все ответы на блоке памяти.^^
 									(С этими словами он встал и вышел из кофе.)]],
 									[[take(memory_block);pon(6);poff(5);]]};
-		{6, false, always = true, "Далее","", [[walk(block_2);]]};
+		{6, false, always = true, "Далее", code = [[walk(block_2);]]};
 						
 	};
 };
