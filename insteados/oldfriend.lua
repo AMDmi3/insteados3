@@ -13,7 +13,7 @@ game.act = "Гм.....";
 game.use = "Не сработает";
 game.inv = "Зачем это мне";
 
-restart_item("oldfriend");
+--restart_item("oldfriend");
 
 main = room {
 	nam = "...",
