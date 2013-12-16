@@ -100,6 +100,10 @@ oldfriend = chapter {
   nam = "11. Старый друг"
 }
 
+wake2 = chapter {
+  nam = "12. Пробуждение-2"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -115,4 +119,5 @@ function init()
   take(engineer);
   take(nightmare);
   take(oldfriend);
+  take(wake2);
 end
