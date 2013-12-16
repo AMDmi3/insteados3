@@ -1,7 +1,8 @@
 require "sprites"
+require "click"
 
 local old_snapshot = restore_snapshot;
-function restore_snapshot()
+function restore_snapshot(n)
   if game.cache ~= nil then
     sprite.free(game.cache);
     game.cache = nil;
@@ -22,7 +23,7 @@ function restore_snapshot()
       game.cache_sprites[k] = nil;
     end
   end
-  return old_snapshot();
+  return old_snapshot(n);
 end
 
 local old_title = instead.get_title;
@@ -42,8 +43,23 @@ function if_(cnd,x,y)
   end
 end
 
+function restart_item(gf)
+  restart_obj = menu {
+     nam = "restart_item"
+    ,disp = txtb("Начать сначала")
+    ,inv = gamefile_(gf..".lua")
+  };
+  sep_obj = menu {nam=" ", inv = function() end};
+  take(restart_obj);
+  take(sep_obj);
+end
+
 local old_room = room;
 function room(r)
+  r.click = function(s)
+    local x,y = mouse_pos();
+    p( tostring(x)..";"..tostring(y) )
+  end
   return old_room(r);
 end
 
