@@ -192,83 +192,93 @@ function()
         spr = sprite.load("gfx/"..vv..".png");
         game.cache_sprites[vv] = spr;
       end
-      local y = 0;
-      if vv == "panel" or vv == "panel_broken" then
-        y = 60;
-      elseif vv == "door1" or vv == "door1_open" then
-        y = 35;
-      elseif vv == "door2" or vv == "door3" or vv == "door4" or vv == "door2_open" or vv == "door5" or vv == "door5_open" then
-        y = 60;
-      elseif vv == "window" or vv == "window2" then
-        y = 62;
-      elseif vv == "toolbox" then
-        y = 171;
-      elseif vv == "crio" or vv == "crio_blood" then
-        y = 45;
-      elseif vv == "robot" or vv == "robot_nohand" or vv == "robot_nohand_blaster" or vv == "robot_cargo" then
-        y = 75;
-      elseif vv == "box" then
-        y = 145;
-      elseif vv == "shelf" then
-        y = 60;
-      elseif vv == "box2" then
-        y = 50;
-      elseif vv == "rat" then
-        y = 135;
-      elseif vv == "rat_dead" then
-        y = 100;
-      elseif vv == "box3" then
-        y = 110;
-      elseif vv == "blood" then
-        y = 107;
-      elseif vv == "shaft" or vv == "shaft_open" then
-        y = 55;
-      elseif vv == "mutant" then
-        y = 28;
-      elseif vv == "med" then
-        y = 60;
-      elseif vv == "zombi" then
-        y = 75;
-      elseif vv == "device" then
-        y = 65;
-      elseif vv == "bfg" then
-        y = 40;
-      elseif vv == "hole" then
-        y = 65;
-      elseif vv == "hole2" then
-        y = 35;
-      elseif vv == "washer" then
-        y = 55;
-      elseif vv == "toilet" then
-        y = 90;
-      elseif vv == "communicator" then
-        y = 80;
-      elseif vv == "table" or vv == "table3" or vv == "table3_keys" then
-        y = 110;
-      elseif vv == "extin" then
-        y = 145;
-      elseif vv == "fridge" then
-        y = 105;
-      elseif vv == "books" then
-        y = 100;
-      elseif vv == "table2" then
-        y = 140;
-      elseif vv == "window3" then
-        y = 70;
-      elseif vv == "zombi_dead" then
-        y = 145;
-      elseif vv == "blaster" or vv == "knife" then
-        y = 40;
-      elseif vv == "vase_flower" or vv == "vase" then
-        y = 70;
-      elseif vv == "repair" or vv == "repair_broken" or vv == "repair_meteor" then
-        y = 95;
-      elseif vv == "table4" then
-        y = 90;
-      elseif vv == "screen" then
-        y = 50;
-      elseif vv == "chair1" or vv == "chair2" then
-        y = 125;
+      local y = v[3];
+      if y == nil then
+        if vv == "panel" or vv == "panel_broken" then
+          y = 60;
+        elseif vv == "door1" or vv == "door1_open" then
+          y = 35;
+        elseif vv == "door2" or vv == "door3" or vv == "door4" or vv == "door2_open" or vv == "door5" or vv == "door5_open" then
+          y = 60;
+        elseif vv == "window" or vv == "window2" then
+          y = 62;
+        elseif vv == "toolbox" then
+          y = 171;
+        elseif vv == "crio" or vv == "crio_blood" then
+          y = 45;
+        elseif vv == "robot" or vv == "robot_nohand" or vv == "robot_nohand_blaster" or vv == "robot_cargo" then
+          y = 75;
+        elseif vv == "box" then
+          y = 145;
+        elseif vv == "shelf" then
+          y = 60;
+        elseif vv == "box2" then
+          y = 50;
+        elseif vv == "rat" then
+          y = 135;
+        elseif vv == "rat_dead" then
+          y = 100;
+        elseif vv == "box3" then
+          y = 110;
+        elseif vv == "blood" then
+          y = 107;
+        elseif vv == "shaft" or vv == "shaft_open" then
+          y = 55;
+        elseif vv == "mutant" then
+          y = 28;
+        elseif vv == "med" then
+          y = 60;
+        elseif vv == "zombi" then
+          y = 75;
+        elseif vv == "device" then
+          y = 65;
+        elseif vv == "bfg" then
+          y = 40;
+        elseif vv == "hole" then
+          y = 65;
+        elseif vv == "hole2" then
+          y = 35;
+        elseif vv == "washer" then
+          y = 55;
+        elseif vv == "toilet" then
+          y = 90;
+        elseif vv == "communicator" then
+          y = 80;
+        elseif vv == "table" or vv == "table3" or vv == "table3_keys" then
+          y = 110;
+        elseif vv == "extin" then
+          y = 145;
+        elseif vv == "fridge" then
+          y = 105;
+        elseif vv == "books" then
+          y = 100;
+        elseif vv == "table2" then
+          y = 140;
+        elseif vv == "window3" then
+          y = 70;
+        elseif vv == "zombi_dead" then
+          y = 145;
+        elseif vv == "blaster" or vv == "knife" then
+          y = 40;
+        elseif vv == "vase_flower" or vv == "vase" then
+          y = 70;
+        elseif vv == "repair" or vv == "repair_broken" or vv == "repair_meteor" then
+          y = 95;
+        elseif vv == "table4" then
+          y = 90;
+        elseif vv == "screen" then
+          y = 50;
+        elseif vv == "door6" then
+          y = 100;
+        elseif vv == "cheese" then
+          y = 160;
+        elseif vv == "table5" then
+          y = 80;
+        elseif vv == "chair1" or vv == "chair2" then
+          y = 125;
+        elseif vv == "foodgen" or vv=="foodgen2" then
+          y = 110;
+        end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);
     end
