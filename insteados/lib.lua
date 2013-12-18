@@ -278,6 +278,10 @@ function()
           y = 125;
         elseif vv == "foodgen" or vv=="foodgen2" then
           y = 110;
+        elseif vv == "window4" then
+          y = 30;
+        elseif vv == "table6" then
+          y = 140;
         end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);

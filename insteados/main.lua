@@ -50,7 +50,7 @@ before_About = menu {
 
 before_Credits = menu {
    nam = "Создатели"
-  ,inv = function() walk(test) end
+  ,inv = function() walk(credits) end
 }
 
 test = timerpause(999, 813, "main");
@@ -109,6 +109,15 @@ rat = chapter {
   nam = "13. Крысиная нора"
 }
 
+robot = chapter {
+  nam = "14. Робот"
+}
+
+dream = chapter {
+  nam = "15. Сон"
+}
+
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -126,4 +135,6 @@ function init()
   take(oldfriend);
   take(wake2);
   take(rat);
+  take(robot);
+  take(dream);
 end
