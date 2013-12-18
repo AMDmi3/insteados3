@@ -282,6 +282,8 @@ function()
           y = 30;
         elseif vv == "table6" then
           y = 140;
+        elseif vv == "cleaner" then
+          y = 105;
         end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);
