@@ -118,7 +118,6 @@ dream = chapter {
   nam = "15. Сон"
 }
 
-
 function init()
   take(before_About);
   take(before_Credits);
