@@ -211,8 +211,8 @@ s4 = R {
 	nam = 'У двери';
 	dsc = [[Коридор закончился большой дверью.]];
 	obj = { 'door', 'c4', 'floor' };
-	exit = function(s)
-		if not door._open then
+	exit = function(s, w)
+		if not door._open and w == s5 then
 			p [[Дверь закрыта.]]
 			return false
 		end
