@@ -56,6 +56,11 @@ before_Credits = menu {
 }
 
 test = timerpause(999, 813, "main");
+test2 = room {
+  nam = ""
+  ,title = { "К", "Р", "Ы", "С", "И", "Н", "А", "Я", " ", "Н", "О", "Р", "А" }
+  ,num = 17
+}
 
 empty = menu { nam = "" }
 

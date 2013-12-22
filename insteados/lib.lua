@@ -38,22 +38,39 @@ alphas = {
   ,["2"] = { 180, 4}
   ,[" "] = { nil, 3}
 }
-function drawalpha(str)
-  local px = game.cache_alpha;
+function drawalpha(num,str)
+  local px = game.cache_alpha1;
   if px == nil then
     px = sprite.load("gfx/alpha.png");
-    game.cache_alpha = px;
+    game.cache_alpha1 = px;
+  end
+  local px2 = game.cache_alpha2;
+  if px2 == nil then
+    px2 = sprite.load("gfx/nums.png");
+    game.cache_alpha2 = px2;
   end
   local len = 0;
   for _,v in ipairs(str) do
     len = len + (alphas[v][2]*5) + 5;
   end
-  local spr = sprite.box(len, 117);
-  local xl = 0;
+  local spr = sprite.box(500, 200);
+  if num ~= nil then
+    --28
+    local strnum = tostring(num);
+    if string.len(strnum) == 1 then
+      sprite.copy(px2, num*4*20, 0, 4*20, 140, spr, 210, 30);
+    else
+      local n1 = string.char(strnum:byte(1))+0;
+      local n2 = string.char(strnum:byte(2))+0;
+      sprite.copy(px2, n1*4*20, 0, 4*20, 140, spr, 165, 30);
+      sprite.copy(px2, n2*4*20, 0, 4*20, 140, spr, 255, 30);
+    end
+  end
+  local xl = (500-len)/2;
   for _,v in ipairs(str) do
     local x,w = alphas[v][1],alphas[v][2];
     if x ~= nil then
-      sprite.copy(px, x*5, 0, w*5, 35, spr, xl, 82);
+      sprite.draw(px, x*5, 0, w*5, 35, spr, xl, 82);
     end
     xl = xl + (w*5) + 5;
   end
@@ -61,9 +78,13 @@ function drawalpha(str)
 end
 
 function cleancache()
-  if game.cache_alpha ~= nil then
-    sprite.free(game.cache_alpha);
-    game.cache_alpha = nil;
+  if game.cache_alpha1 ~= nil then
+    sprite.free(game.cache_alpha1);
+    game.cache_alpha1 = nil;
+  end
+  if game.cache_alpha2 ~= nil then
+    sprite.free(game.cache_alpha2);
+    game.cache_alpha2 = nil;
   end
   if game.cache ~= nil then
     sprite.free(game.cache);
@@ -127,7 +148,7 @@ function room(r)
   if r.title ~= nil then
     r.pic = function(s)
       if s.cache_title == nil then
-        s.cache_title = drawalpha(s.title);
+        s.cache_title = drawalpha(s.num,s.title);
       end
       return s.cache_title;
     end
