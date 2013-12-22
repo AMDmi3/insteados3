@@ -284,6 +284,12 @@ function()
           y = 140;
         elseif vv == "cleaner" then
           y = 105;
+        elseif vv == "ballon" or vv == "ballon2" then
+          y = 120;
+        elseif vv == "monitor" or vv == "monitor2" then
+          y = 50;
+        elseif vv == "barrel" or vv == "barrel2" then
+          y = 155;
         end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);

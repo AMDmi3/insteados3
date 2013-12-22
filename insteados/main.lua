@@ -126,6 +126,10 @@ persona = chapter {
   nam = "16. Личность"
 }
 
+arrival = chapter {
+  nam = "17. Прибытие"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -147,4 +151,5 @@ function init()
   take(robot);
   take(dream);
   take(persona);
+  take(arrival);
 end
