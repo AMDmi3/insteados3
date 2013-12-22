@@ -118,10 +118,19 @@ dream = chapter {
   nam = "15. Сон"
 }
 
+prologue = chapter {
+  nam = "0. Пролог"
+}
+
+persona = chapter {
+  nam = "16. Личность"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
   take(empty);
+  take(prologue);
   take(watch);
   take(longwork);
   take(repair);
@@ -137,4 +146,5 @@ function init()
   take(rat);
   take(robot);
   take(dream);
+  take(persona);
 end
