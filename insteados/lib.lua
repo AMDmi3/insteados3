@@ -1,8 +1,7 @@
 require "sprites"
 require "click"
 
-local old_snapshot = restore_snapshot;
-function restore_snapshot(n)
+function cleancache()
   if game.cache ~= nil then
     sprite.free(game.cache);
     game.cache = nil;
@@ -23,8 +22,14 @@ function restore_snapshot(n)
       game.cache_sprites[k] = nil;
     end
   end
+end
+
+local old_snapshot = restore_snapshot;
+function restore_snapshot(n)
+  cleancache();
   return old_snapshot(n);
 end
+
 
 local old_title = instead.get_title;
 instead.get_title = function()
@@ -321,6 +326,7 @@ end
 
 function gamefile_(fl)
   return function()
+    cleancache();
     gamefile(fl, true);
   end
 end
