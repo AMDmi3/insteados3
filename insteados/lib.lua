@@ -1,7 +1,70 @@
 require "sprites"
 require "click"
 
+alphas = {
+   ["А"] = { 0, 4}
+  ,["Б"] = { 5, 4}
+  ,["В"] = { 10, 4}
+  ,["Г"] = { 15, 4}
+  ,["Д"] = { 20, 6}
+  ,["Е"] = { 27, 4}
+  ,["Ж"] = { 32, 5}
+  ,["З"] = { 38, 4}
+  ,["И"] = { 43, 4}
+  ,["К"] = { 48, 4}
+  ,["Л"] = { 53, 5}
+  ,["М"] = { 59, 5}
+  ,["Н"] = { 65, 4}
+  ,["О"] = { 70, 4}
+  ,["П"] = { 75, 4}
+  ,["Р"] = { 80, 4}
+  ,["С"] = { 85, 4}
+  ,["Т"] = { 90, 5}
+  ,["У"] = { 96, 4}
+  ,["Ф"] = { 101, 5}
+  ,["Х"] = { 107, 4}
+  ,["Ц"] = { 112, 5}
+  ,["Ч"] = { 118, 4}
+  ,["Ш"] = { 123, 5}
+  ,["Щ"] = { 129, 6}
+  ,["Ъ"] = { 136, 5}
+  ,["Ь"] = { 142, 6}
+  ,["Ы"] = { 149, 4}
+  ,["Э"] = { 154, 4}
+  ,["Ю"] = { 159, 5}
+  ,["Я"] = { 165, 4}
+  ,["0"] = { 170, 4}
+  ,["7"] = { 175, 4}
+  ,["2"] = { 180, 4}
+  ,[" "] = { nil, 3}
+}
+function drawalpha(str)
+  local px = game.cache_alpha;
+  if px == nil then
+    px = sprite.load("gfx/alpha.png");
+    game.cache_alpha = px;
+  end
+  local len = 0;
+  for _,v in ipairs(str) do
+    len = len + (alphas[v][2]*5) + 5;
+  end
+  local spr = sprite.box(len, 117);
+  local xl = 0;
+  for _,v in ipairs(str) do
+    local x,w = alphas[v][1],alphas[v][2];
+    if x ~= nil then
+      sprite.copy(px, x*5, 0, w*5, 35, spr, xl, 82);
+    end
+    xl = xl + (w*5) + 5;
+  end
+  return spr;
+end
+
 function cleancache()
+  if game.cache_alpha ~= nil then
+    sprite.free(game.cache_alpha);
+    game.cache_alpha = nil;
+  end
   if game.cache ~= nil then
     sprite.free(game.cache);
     game.cache = nil;
@@ -61,9 +124,26 @@ end
 
 local old_room = room;
 function room(r)
-  r.click = function(s)
-    local x,y = mouse_pos();
-    p( tostring(x)..";"..tostring(y) )
+  if r.title ~= nil then
+    r.pic = function(s)
+      if s.cache_title == nil then
+        s.cache_title = drawalpha(s.title);
+      end
+      return s.cache_title;
+    end
+    local exit = r.exit;
+    r.exit = function(s,v,w)
+      if exit ~= nil then
+        local ret = exit(s,v,w);
+        if ret ~= nil then
+          return ret;
+        end
+      end
+      if s.cache_title ~= nil then
+        sprite.free(s.cache_title);
+        s.cache_title = nil;
+      end
+    end
   end
   return old_room(r);
 end
@@ -154,7 +234,7 @@ function timerpause(snum,enum,next)
         end
         s._nodraw = s._nodraw + 1;
       end
-      if s._nodraw ~= nil and s._nodraw == 80 then
+      if s._nodraw ~= nil and (s._nodraw == 80 or s.snum == s.enum) then
         timer:stop();
         s._cur = s.snum;
         s._nodraw = nil;

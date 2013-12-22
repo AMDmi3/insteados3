@@ -4,9 +4,10 @@ require "para"
 require "dash"
 require "quotes"
 require "xact"
+require "timer"
 
 main = room {
-   nam = "Пролог"
+   nam = "..."
   ,pxa = { { "ship", 0, 0 } }
   ,act = function() walk(main2) end
   ,dsc = [[Далёкое будущее. Земля на грани катастрофы. Последняя надежда человечества -- огромный космический корабль, построенный в международном космическом центре
@@ -15,7 +16,7 @@ main = room {
 }
 
 main2 = room {
-   nam = "Пролог"
+   nam = "..."
   ,pxa = { { "planet", 172, 22 } }
   ,act = function() walk(main3) end
   ,dsc = [[И вот, наконец, спустя пятьдесят лет после завершения строительства корабля, учёные в Сибири обнаружили с помощью самого большого в мире телескопа под
@@ -26,8 +27,15 @@ main2 = room {
 }
 
 main3 = room {
-   nam = "Пролог"
-  ,act = gamefile_("rat.lua")
+   nam = "..."
+  ,act = function() walk(main4) end
   ,dsc = [[Спустя всего несколько лет план полёта был утверждён, и стали появляться первые пассажиры...]]
   ,obj = { vobj("next", '{Начать игру}') }
+}
+
+main4 = room {
+   nam = ""
+  ,enter = function() timer:set(4000) end
+  ,pxa = { { "caption", 0, 0 } }
+  ,timer = function() gamefile_("rat.lua")() end
 }

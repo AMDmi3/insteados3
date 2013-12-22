@@ -5,6 +5,7 @@ dofile "lib.lua"
 require "para"
 require "dash"
 require "quotes"
+require "xact"
 
 game.use = function(s,v)
   return "Это не есть "..v.nam .."!";
@@ -30,7 +31,7 @@ end
 function vb(o) o.inv = function(s) return s.nam.."!" end; return obj(o) end
 
 main = room {
-   nam = ""
+   nam = "..."
   ,dsc = "Я есть бежать."
   ,act = function()
  walk(start2);
@@ -39,20 +40,21 @@ end
 }
 
 start2 = room {
-  nam = ""
+  nam = "..."
   ,act = function() walk(start3) end
   ,dsc= "Я есть бежать, бежать."
   ,obj = { vobj("next", '{Дальше}') }
 }
 
 start3 = room {
-  nam = ""
+  nam = "..."
   ,act = function() walk(start4) end
   ,dsc= "Зубастый гнаться за мной, я не успеть бежать в нора как раньше. Я бежать в какой-то другой нора -- длинный-длинный туннель. Потом ещё один туннель. Потом бежать в ещё один туннель. Потом в ещё один туннель.^Зубастый не оставать, зубастый бежать быстро-быстро."
   ,obj = { vobj("next", '{Дальше}') }
 }
 start4 = room {
-  nam = ""
+  nam = "..."
+  ,title = { "К", "Р", "Ы", "С", "И", "Н", "А", "Я", " ", "Н", "О", "Р", "А" }
   ,act = function() take(eat);take(cry);take(th);take(climb);take(cry);take(push);walk(floor) end
   ,dsc= "Я бежать мимо человеков, потом бежать в какой-то странный большой нора, который двигаться вверх! Потом я бежать куда-то, где много человеков. Я бояться! Я лезть на ящик. Потом я лезть на ящик. Потом я ещё лезть на ящик. Потом я лезть в потолочный нора. Потом я бежать по потолочный нора -- длинный-длинный нора! Потом я вдруг падать! Больно падать! И вот я здесь...^^Где я?"
   ,obj = { vobj("next", '{Начать игру}') }
@@ -340,7 +342,8 @@ pxa = {
 timer=function()timer:stop();walk(end6)end
 }
 end6=room{
-nam="КОНЕЦ",
-dsc=txtc("КОНЕЦ?")
+nam="",
+act = gamefile_("longwork.lua"),
+obj = { vobj("next", txtc("^{КОНЕЦ?}")) }
 }
 
