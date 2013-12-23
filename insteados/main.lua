@@ -26,7 +26,7 @@ main = room {
    end
   ,enter = function(s)
     music_("railroad",0)();
-    timer:set(50);
+    timer:set(90);
    end
   ,timer = function(s)
     if s.cachesf == nil then
