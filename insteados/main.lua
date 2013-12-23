@@ -116,6 +116,7 @@ function chapter(s)
   end
   s.inv = function(s)
     local nm = deref(s);
+    if nm == "endtitles" then theme.gfx.mode("direct"); end
     gamefile_(nm..".lua")();
   end
   return menu(s);
@@ -188,6 +189,10 @@ arrival = chapter {
   nam = "Прибытие"
 }
 
+endtitles = chapter {
+  nam = "Титры"
+}
+
 function init()
   take(before_About);
   take(before_Credits);
@@ -210,4 +215,5 @@ function init()
   take(wake);
   take(wake2);
   take(arrival);
+  --take(endtitles);
 end
