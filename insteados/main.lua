@@ -7,11 +7,56 @@ require "dash"
 require "quotes"
 require "timer"
 require "xact"
+require "sprites"
 
 main = room {
    nam = "Об игре"
-  ,enter = music_("railroad",0)
-  ,pic = "gfx/caption.png"
+  ,pic = function(s)
+    s:ensurecache();
+    return game.cache;
+   end
+  ,ensurecache = function(s)
+    if game.cache == nil then
+      game.cache = sprite.load("gfx/pic.png");
+    else
+      local pt = sprite.blank(500, 200);
+      sprite.copy(pt, game.cache, 0, 0);
+      sprite.free(pt);
+    end
+   end
+  ,enter = function(s)
+    music_("railroad",0)();
+    timer:set(50);
+   end
+  ,timer = function(s)
+    if s.cachesf == nil then
+      s.cachesf = sprite.load("gfx/starfield.png");
+    end
+    if s.cachesf2 == nil then
+      s.cachesf2 = sprite.load("gfx/caption.png");
+    end
+    if s._x == nil then
+      s._x = 0;
+    end
+    sprite.copy(s.cachesf, s._x, 0, 500, 200, game.cache, 0, 0);
+    sprite.draw(s.cachesf2, game.cache, 0, 0);
+    s._x = s._x + 2;
+    if s._x > 500 then
+      s._x = 0;
+    end
+   end
+  ,exit = function(s)
+    if s.cachesf ~= nil then
+      sprite.free(s.cachesf);
+      s.cachesf = nil;
+    end
+    if s.cachesf2 ~= nil then
+      sprite.free(s.cachesf2);
+      s.cachesf2 = nil;
+    end
+    s._x = nil;
+    timer:stop();
+   end
   ,dsc =
     [["ИНСТЕДОЗ 3" -- это сборник небольших текстовых игр, написанных разными авторами в рамках единого сюжета. Сборник включает в себя
       17 самостоятельных игр, однако все они складываются в отдельную историю, поэтому мы советуем вам пройти "ИНСТЕДОЗ 3" последовательно,
