@@ -45,8 +45,8 @@ crio = room {
       { "door4", 5 }, 
       { "panel", 150 },
       { "toolbox", 220 },
-      { "crio", 290 },
-      { "crio", 420 }
+      { "crio", 310 },
+      --{ "crio", 420 }
     })
   ,dsc = "Я в криоблоке К007."
   ,obj = { "darkness", "capsulas", "cinfo", "toolbox", "screw", "flash", "powerbox", "switch" }
