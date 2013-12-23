@@ -68,7 +68,7 @@ function drawalpha(num,str)
   for _,v in ipairs(str) do
     len = len + (alphas[v][2]*5) + 5;
   end
-  local spr = sprite.box(500, 200);
+  local spr = sprite.box(500, 200, "black");
   if num ~= nil then
     --28
     local strnum = tostring(num);
@@ -286,6 +286,18 @@ function timerpause(snum,enum,next)
   }
 end
 
+function loadsprite(vv)
+  if game.cache_sprites == nil then
+    game.cache_sprites = {};
+  end
+  local spr = game.cache_sprites[vv];
+  if spr == nil then
+    spr = sprite.load("gfx/"..vv..".png");
+    game.cache_sprites[vv] = spr;
+  end
+  return spr;
+end
+
 game.pic = 
 function()
   local s = here();
@@ -309,11 +321,7 @@ function()
   for _,v in ipairs(pxa) do
     local vv = tc(v[1],s);
     if vv ~= nil then
-      local spr = game.cache_sprites[vv];
-      if spr == nil then
-        spr = sprite.load("gfx/"..vv..".png");
-        game.cache_sprites[vv] = spr;
-      end
+      local spr = loadsprite(vv);
       local y = v[3];
       if y == nil then
         if vv == "panel" or vv == "panel_broken" then
@@ -412,6 +420,8 @@ function()
           y = 50;
         elseif vv == "barrel" or vv == "barrel2" then
           y = 155;
+        elseif vv == "ratsmall" then
+          y = 165;
         end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);

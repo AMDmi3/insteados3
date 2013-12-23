@@ -25,7 +25,7 @@ main = room {
     end
    end
   ,enter = function(s)
-    music_("railroad",0)();
+   -- music_("railroad",0)();
     timer:set(90);
    end
   ,timer = function(s)
@@ -94,7 +94,7 @@ credits = room {
     txtb("Музыка:")..
     [[^8bit Betty ("Spooky Loop")
       ^J. Arthur Keenes ("The Day Before Boxing Day Eve")
-      ^Rolemusic ("Ladybug Castle", "Spell", "Scape from the city", "Death on the battlefield")
+      ^Rolemusic ("Ladybug Castle", "Spell", "Scape from the city", "Death on the battlefield", "Poppies")
       ^Goto80 ("this machine thinks", "square and enjoy", "influensa", "datagroove", "5pyhun73r 3l337 v3r")
       ^Edward Shallow ("The Infinite Railroad")
       (Подробную информацию об используемой в игре музыке см. в прилагаемом файле music.txt)
@@ -121,22 +121,13 @@ before_About = menu {
    nam = "Об игре"
   ,inv = function() walk(main) end
 }
-
+dofile "endtitles.lua"
 before_Credits = menu {
    nam = "Создатели"
-  ,inv = function() walk(credits) end
-}
-
-test = timerpause(999, 813, "main");
-test2 = room {
-  nam = ""
-  ,title = { "К", "Р", "Ы", "С", "И", "Н", "А", "Я", " ", "Н", "О", "Р", "А" }
-  ,num = 17
+  ,inv = function() theme.gfx.mode("direct");walk(title1) end
 }
 
 empty = menu { nam = "" }
-empty2 = menu { nam = "" }
-
 
 prologue = chapter {
   nam = "Пролог"
