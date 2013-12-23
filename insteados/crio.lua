@@ -25,7 +25,7 @@ main2 = R {
   num = 4;
 	forcedsc = true;
 	hideinv = true;
-  enter = function() music_("machinethinks",0)();take 'sh' end;
+  enter = function() music_("pumped",0)();take 'sh' end;
 	dsc = [[Я WR017 и моя вахта уже подходит к концу.
 	Сейчас я заканчиваю уборку в крио-отсеке К007 и 
 	у меня еще останется время, чтобы спокойно добраться
