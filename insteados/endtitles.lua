@@ -38,7 +38,6 @@ end
 title1 = titleroom {
    nam = ""
   ,enter = function(s)
-    music_("datagroove")();
     timer:set(200);
    end
   ,prepare = function(s)
@@ -219,6 +218,7 @@ title2 = titleroom {
     s._frame = nil;
     if s.bx ~= nil then
       sprite.free(s.bx);
+      s.bx = nil;
     end
    end
 }
@@ -353,9 +353,11 @@ title3 = titleroom {
     s._frame = nil;
     if s.bx ~= nil then
       sprite.free(s.bx);
+      s.bx =nil;
     end
     if s.bx2 ~= nil then
       sprite.free(s.bx2);
+      s.bx2=nil;
     end
    end
 }
@@ -450,6 +452,7 @@ title4 = titleroom {
     s._frame = nil;
     if s.bx ~= nil then
       sprite.free(s.bx);
+      s.bx = nil;
     end
    end
 }
@@ -573,6 +576,12 @@ title5 = titleroom {
     elseif s._frame == 75 then
       mute_()();
       theme.gfx.reset();
+      title1.directdrawn=nil;
+      title2.directdrawn=nil;
+      title3.directdrawn=nil;
+      title4.directdrawn=nil;
+      title5.directdrawn=nil;
+      game.codec=nil;
       if game.cachefont ~= nil then
         sprite.free_font(cachefont);
         game.cachefont = nil;
@@ -591,9 +600,11 @@ title5 = titleroom {
     s._frame = nil;
     if s.bx ~= nil then
       sprite.free(s.bx);
+      s.bx = nil;
     end
     if s.bx2 ~= nil then
       sprite.free(s.bx2);
+      s.bx2 = nil;
     end
    end
 }

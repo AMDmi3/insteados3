@@ -25,7 +25,7 @@ main = room {
     end
    end
   ,enter = function(s)
-   -- music_("railroad",0)();
+    music_("railroad",0)();
     timer:set(90);
    end
   ,timer = function(s)
@@ -124,7 +124,9 @@ before_About = menu {
 dofile "endtitles.lua"
 before_Credits = menu {
    nam = "Создатели"
-  ,inv = function() theme.gfx.mode("direct");walk(title1) end
+  ,inv = function() 
+    mute_(0,0)();
+    music_("datagroove")();theme.gfx.mode("direct");walk(title1) end
 }
 
 empty = menu { nam = "" }
