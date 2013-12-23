@@ -1,7 +1,7 @@
 -- $Name: Банкет$
 -- $Version: 0.1$
 instead_version "1.9.1"
-dofile "lib.lua"
+require "lib"
 require "para"
 require "dash"
 require "quotes"

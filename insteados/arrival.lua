@@ -1,6 +1,6 @@
 --$Name:Прибытие$
 instead_version "1.9.1"
-dofile "lib.lua"
+require "lib"
 require "nouse"
 require "hideinv"
 require "para"

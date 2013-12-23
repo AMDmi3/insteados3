@@ -1,6 +1,6 @@
 -- $Name: Пояс астероидов$
 instead_version "1.9.1";
-dofile "lib.lua"
+require "lib"
 require "dash";
 game.codepage="UTF-8";
 game.use = function()

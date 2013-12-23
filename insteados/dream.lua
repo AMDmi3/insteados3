@@ -3,7 +3,7 @@
 --$Author: Андрей Лобанов$
 
 instead_version '1.9.1'
-
+require "lib"
 require "para"
 require "dash"
 require "quotes"

@@ -3,7 +3,7 @@
 -- $Version: 0.1$
 -- $E-mail: jmaksima_at_gmail_dot_com$
 instead_version '1.9.1';
-dofile "lib.lua"
+require "lib"
 game.enable_save = false; require 'para'; require 'dash'; require 'quotes'; require 'nouse'; require 'hideinv'; --require 'dbg'; 
 pl = player {nam = "WR096",    var { diag_stat=false, leg_stat=false, arm_stat=false, stand_stat=false, stand_try=false, standup_try=false, stand_sw_stat=false, roll_stat=false, crawl_stat=false, look_stat = false },  };
 

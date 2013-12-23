@@ -1,13 +1,6 @@
 -- $Name: Пробуждение 2: Воскрешение.$
 instead_version "1.9.1"
-dofile "lib.lua"
-if stead.version < "1.5.3" then
-    walk = _G["goto"]
-    walkin = goin
-    walkout = goout
-    walkback = goback
-end
-
+require "lib"
 require "xact"
 require "hideinv"
 require "para"

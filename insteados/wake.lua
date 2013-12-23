@@ -1,6 +1,6 @@
 -- $Name: Пробуждение$
 instead_version "1.9.1"
-dofile "lib.lua"
+require "lib"
 require "para"
 require "dash"
 require "quotes"

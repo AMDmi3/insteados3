@@ -422,7 +422,9 @@ if type(f) == "function" then return tc(f(s),s) else return f end
 end
 function obj(t)
 local d = t.dsc;
-t.dsc = function(s) if s.cnd == nil or s:cnd() then return tc(d,s) end end
+if t.dsc then
+    t.dsc = function(s) if s.cnd == nil or s:cnd() then return tc(d,s) end end
+end
 return oob(t);
 end
 

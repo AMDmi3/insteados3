@@ -2,7 +2,7 @@
 -- $Version: 1.0$
 -- $Author: Клиш Максим$
 instead_version "1.9.1"
-dofile "lib.lua"
+require "lib"
 require "para" 
 require "dash"
 require "quotes"
