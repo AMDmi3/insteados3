@@ -436,7 +436,7 @@ destructor = obj {
 
 endscreen = room {
     nam = "Конец",
-    enter = function() mute_()(); complete_("cook") end,
+    enter = function() mute_()(); complete_("cook")() end,
     dsc = "Вот и подошел конец моему дежурству. Надеюсь, вечеринка по случаю прибытия удастся.^Ну а мне пора в свой отсек, на очередную гибернацию.^",
    act = gamefile_("dream.lua"),
    obj = { vobj("next", txtc("{Продолжение...}")) }
