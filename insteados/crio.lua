@@ -581,7 +581,7 @@ end
 theend = R {
 	nam = '...';
 	hideinv = true;
-  enter = mute_();
+  enter = function() mute_()(); complete_("crio")(); end;
 	dsc = function(s)
 		p [[Я без приключений добрался до своего отсека и закрыл за собой дверь.	^
 		Все закончилось не так уж и плохо!]]

@@ -390,6 +390,7 @@ endgame = room {
         return false;
       end
       mute_()();
+      complete_("repair")();
       remove(flash,me());
       remove(screw,me());
     end

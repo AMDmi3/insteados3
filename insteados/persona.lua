@@ -18,6 +18,15 @@ _patterns = {};
 game.use = "Вариантов успешного завершения инструкций 0... Отмена действия."
 
 main = room {
+   nam = "..."
+  ,enter = music_("castle")
+  ,title = {"Л", "И", "Ч", "Н", "О", "С", "Т", "Ь" }
+  ,num = 14
+  ,act = function() walk(main2) end
+  ,obj = { vobj("next", '{Начать игру}') }
+}
+
+main2 = room {
 	forcedsc = true;
   pxa = {
     { "door4", 10 },
@@ -74,7 +83,7 @@ programmator_mozgov = obj {
 coderoom = room {
 	nam = "Кодовый замок",
 	dsc = "Это ящик Александра",
-	way = {"main"},
+	way = {"main2"},
 	obj = {"one","two","three","four", "openbox"},
 }
 
@@ -151,7 +160,7 @@ podsoznanie_room = room {
   pxa = {
     { "screen", 165 }
   },
-    way = {"podsoznanie_room","person","superego","main"},
+    way = {"podsoznanie_room","person","superego","main2"},
     obj = {"it_crioson","it_meds"},
 }
 
@@ -187,7 +196,7 @@ person = room {
   pxa = {
     { "screen", 165 }
   },
-	way = {"podsoznanie_room","person","superego","main"},
+	way = {"podsoznanie_room","person","superego","main2"},
 	obj = {"person_dmitry","p_dm_stress","p_dm_depression", }
 }
 
@@ -196,7 +205,7 @@ superego = room {
   pxa = {
     { "screen", 165 }
   },
-	way = {"podsoznanie_room","person","superego","main"},
+	way = {"podsoznanie_room","person","superego","main2"},
 	obj = {"s_dm_parents","s_dm_dolg"},
 }
 
@@ -213,7 +222,9 @@ final_s_dm_parents = obj {
 
 final_rooom = room {
 	nam = "Выход",
-	dsc = txtc("КОНЕЦ?"),
+  enter = function() mute_()(); complete_("persona")() end,
+ act = gamefile_("wake.lua"),
+ obj = { vobj("next", txtc("{КОНЕЦ?}")) }
 }
 
 
@@ -266,7 +277,7 @@ it_meds = obj {
 chestroom = room {
 	nam = "Ящик Александра",
 	obj = {"disk_in_chestroom","rat_in_chestroom"},
-	way = {"main"},
+	way = {"main2"},
 }
 
 rat_in_chestroom = obj {

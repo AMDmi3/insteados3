@@ -347,7 +347,7 @@ timer=function()timer:stop();walk(end6)end
 }
 end6=room{
 nam="",
-enter = mute_(),
+enter = function() mute_()(); complete_("rat")() end,
 act = gamefile_("longwork.lua"),
 obj = { vobj("next", txtc("КОНЕЦ?^^{Это только начало...}")) }
 }

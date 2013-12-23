@@ -351,7 +351,7 @@ pap = obj {
 
 endgame = room {
    nam = "Конец"
-  ,enter = mute_()
+  ,enter = function() mute_()(); complete_("longwork")() end
   ,dsc = "Интересно, где бы мне взять исправную ногу?^^"
   ,act = gamefile_("repair.lua")
   ,obj = { vobj("next", txtc("{Продолжение...}")) }

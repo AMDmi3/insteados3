@@ -41,7 +41,7 @@ main3 = room {
 
 main4 = room {
    nam = ""
-  ,enter = function() music_("tadam")();timer:set(4000) end
+  ,enter = function() music_("tadam")();timer:set(4000);complete_("prologue")() end
   ,title = { "П", "О", "С", "Л", "Е", "Д", "Н", "И", "Й", " ", "Р", "Е", "Й", "С" }
   ,timer = function() gamefile_("rat.lua")() end
 }

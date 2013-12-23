@@ -1,5 +1,19 @@
 require "sprites"
 require "click"
+require "snapshots"
+require "prefs"
+
+function complete_(game)
+  return function()
+    prefs[game] = true;
+    prefs:store();
+  end
+end
+
+function iscomplete(game)
+  prefs:load();
+  return prefs[game] ~= nil;
+end
 
 alphas = {
    ["А"] = { 0, 4}
@@ -37,7 +51,7 @@ alphas = {
   ,["7"] = { 175, 4}
   ,["2"] = { 180, 4}
   ,["Й"] = { 185, 5}
-  ,[" "] = { nil, 3}
+  ,[" "] = { nil, 2}
 }
 function drawalpha(num,str)
   local px = game.cache_alpha1;
@@ -100,12 +114,14 @@ function cleancache()
       sprite.free(v);
       game.cache_nums[k] = nil;
     end
+    game.cache_nums = nil;
   end
   if game.cache_sprites ~= nil then
     for k,v in pairs(game.cache_sprites) do
       sprite.free(v);
       game.cache_sprites[k] = nil;
     end
+    game.cache_sprites = nil;
   end
 end
 
@@ -114,7 +130,6 @@ function restore_snapshot(n)
   cleancache();
   return old_snapshot(n);
 end
-
 
 local old_title = instead.get_title;
 instead.get_title = function()

@@ -9,8 +9,14 @@ require "dash"
 require "xact"
 R = room
 O = obj
-main = R {
-	nam = 'Прибытие';
+
+main = timerpause(1, 0, "main2");
+
+main2 = R {
+	nam = '...';
+  title = {"П", "Р", "И", "Б", "Ы", "Т", "И", "Е" };
+  num = 17;
+  enter = music_("scape",0);
 	forcedsc = true;
   pxa = {
     { "planet", 172, 22 }
@@ -473,6 +479,7 @@ hend = R {
 	hideinv = true;pxa = {
     { "planet", 172, 22 }
   };
+  enter = function() mute_()(); complete_("arrival")() end;
 	entered = code [[ inv():zap() ]];
 	dsc = [[
 		-- Так значит, эта планета покинута своими обитателями почти тысячу лет назад?^

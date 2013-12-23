@@ -231,6 +231,7 @@ timer = function(s)
 s._f=s._f+1;
 if s._s==5 then
 mute_()();
+complete_("watch")();
 s._s=6;
 s._dsc=s._dsc.."^^"..txtc("{next|КОНЕЦ?}");
 timer:stop();

@@ -10,7 +10,7 @@ require "xact"
 
 main = room {
    nam = "Об игре"
-  ,enter = music_("datagroove",0)
+  ,enter = music_("railroad",0)
   ,pic = "gfx/caption.png"
   ,dsc =
     [["ИНСТЕДОЗ 3" -- это сборник небольших текстовых игр, написанных разными авторами в рамках единого сюжета. Сборник включает в себя
@@ -43,6 +43,14 @@ credits = room {
 }
 
 function chapter(s)
+  local nam = s.nam;
+  s.nam = function(s)
+    if iscomplete(deref(s)) then
+      return img("pad:0 5 0 0,gfx/dot2.png")..nam;
+    else
+      return img("pad:0 5 0 0,gfx/dot.png")..nam;
+    end
+  end
   s.inv = function(s)
     local nm = deref(s);
     gamefile_(nm..".lua")();
@@ -72,69 +80,58 @@ empty2 = menu { nam = "" }
 
 
 prologue = chapter {
-  nam = "0. Пролог"
+  nam = "Пролог"
 }
 rat = chapter {
-  nam = "1. Крысиная нора"
+  nam = "Крысиная нора"
 }
 longwork = chapter {
-  nam = "2. Долгая служба"
+  nam = "Долгая служба"
 }
 repair = chapter {
-  nam = "3. Ремонт"
+  nam = "Ремонт"
 }
 crio = chapter {
-  nam = "4. Отсек 007"
+  nam = "Отсек 007"
 }
 watch = chapter {
-  nam = "5. Вахта"
+  nam = "Вахта"
 }
 brokencycle = chapter {
-  nam = "6. Разорванный цикл"
+  nam = "Разорванный цикл"
 }
 meteor = chapter {
-  nam = "7. Пояс астероидов"
+  nam = "Пояс астероидов"
 }
-
-wake = chapter {
-  nam = "7. Пробуждение"
-}
-
-cook = chapter {
-  nam = "8. Подготовка к вечеринке"
-}
-
-engineer = chapter {
-  nam = "9. Инженер"
-}
-
-nightmare = chapter {
-  nam = "10. Банкет"
-}
-
-oldfriend = chapter {
-  nam = "11. Старый друг"
-}
-
-wake2 = chapter {
-  nam = "12. Пробуждение-2"
-}
-
 robot = chapter {
-  nam = "14. Робот, который видит..."
+  nam = "Робот, который видит"
 }
-
+engineer = chapter {
+  nam = "Инженер"
+}
+oldfriend = chapter {
+  nam = "Старый друг"
+}
+cook = chapter {
+  nam = "Повар"
+}
 dream = chapter {
-  nam = "15. Сон"
+  nam = "Сон"
 }
-
-
+nightmare = chapter {
+  nam = "Банкет"
+}
 persona = chapter {
-  nam = "16. Личность"
+  nam = "Личность"
 }
-
+wake = chapter {
+  nam = "Пробуждение"
+}
+wake2 = chapter {
+  nam = "Пробуждение 2"
+}
 arrival = chapter {
-  nam = "17. Прибытие"
+  nam = "Прибытие"
 }
 
 function init()
@@ -149,16 +146,14 @@ function init()
   take(watch);
   take(brokencycle);
   take(meteor);
-  
-  take(empty2);
-  take(wake);
-  take(cook);
-  take(engineer);
-  take(nightmare);
-  take(oldfriend);
-  take(wake2);
   take(robot);
+  take(engineer);
+  take(oldfriend);
+  take(cook);
   take(dream);
+  take(nightmare);
   take(persona);
+  take(wake);
+  take(wake2);
   take(arrival);
 end
