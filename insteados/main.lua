@@ -38,10 +38,17 @@ main = room {
     if s._x == nil then
       s._x = 0;
     end
-    sprite.copy(s.cachesf, s._x, 0, 500, 200, game.cache, 0, 0);
+    local w = 500;
+    if s._x > 500 then
+      w = w - (s._x-500);
+    end
+    sprite.copy(s.cachesf, s._x, 0, w, 200, game.cache, 0, 0);
+    if s._x > 500 then
+      sprite.copy(s.cachesf, 0, 0, 500-w, 200, game.cache, w, 0);
+    end
     sprite.draw(s.cachesf2, game.cache, 0, 0);
     s._x = s._x + 2;
-    if s._x > 500 then
+    if s._x > 1000 then
       s._x = 0;
     end
    end
