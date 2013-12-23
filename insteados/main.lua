@@ -75,7 +75,11 @@ main = room {
 
 credits = room {
    nam = "Создатели"
-  ,pic = "gfx/caption.png"
+  ,pic = main.pic
+  ,ensurecache = main.ensurecache
+  ,exit = main.exit
+  ,enter = main.enter
+  ,timer = main.timer
   ,dsc = 
     txtb("Платформа INSTEAD:").. " Пётр Косых^" ..
     txtb("Подготовка сборника:").." Василий Воронков^^"..
@@ -121,12 +125,10 @@ before_About = menu {
    nam = "Об игре"
   ,inv = function() walk(main) end
 }
-dofile "endtitles.lua"
+
 before_Credits = menu {
    nam = "Создатели"
-  ,inv = function() 
-    mute_(0,0)();
-    music_("datagroove")();theme.gfx.mode("direct");walk(title1) end
+  ,inv = function() walk(credits) end
 }
 
 empty = menu { nam = "" }

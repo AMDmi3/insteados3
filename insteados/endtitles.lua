@@ -1,5 +1,7 @@
 require "sprites"
 require "timer"
+require "xact"
+require "lib"
 
 function cleanlines()
   if game.cachefontbox == nil then
@@ -35,9 +37,11 @@ function titleroom(r)
   return room(r);
 end
 
-title1 = titleroom {
+main = titleroom {
    nam = ""
   ,enter = function(s)
+    mute_(0,0)();
+    music_("datagroove")();
     timer:set(200);
    end
   ,prepare = function(s)
@@ -576,7 +580,7 @@ title5 = titleroom {
     elseif s._frame == 75 then
       mute_()();
       theme.gfx.reset();
-      title1.directdrawn=nil;
+      main.directdrawn=nil;
       title2.directdrawn=nil;
       title3.directdrawn=nil;
       title4.directdrawn=nil;
@@ -590,7 +594,7 @@ title5 = titleroom {
         sprite.free(game.cachefontbox);
         game.cachefontbox = nil;
       end
-      return walk(main);
+      return walk(hend1);
     end
     
     s._frame = s._frame + 1;
@@ -607,6 +611,29 @@ title5 = titleroom {
       s.bx2 = nil;
     end
    end
+}
+
+hend1 = room {
+   nam = "Конец"
+  ,pxa = {
+    { "planet", 172, 22 }
+  }
+  ,dsc = "{xwalk(hend2)|-- Адмирал, есть ещё кое-что...}"
+}
+
+hend2 = room {
+	nam = 'Конец';
+  pxa = {
+    { "planet", 172, 22 }
+  };
+	dsc = [[
+		-- Я думаю вы должны знать.^
+		-- Да?^
+		-- Мы выяснили, куда делись жители планеты...^
+		-- И?^
+		-- Похоже, они отправились к Земле...^^
+		<c>КОНЕЦ</c>
+	]];
 }
 
 
