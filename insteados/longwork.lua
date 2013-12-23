@@ -31,6 +31,7 @@ main = timerpause(1100, 1100, "main2");
 
 main2 = room {
    nam = "..."
+  ,enter = music_("square",0)
   ,title = { "Д", "О", "Л", "Г", "А", "Я", " ", "С", "Л", "У", "Ж", "Б", "А" }
   ,num = 2
   ,act = function(s) walk("sylo") end
@@ -350,6 +351,7 @@ pap = obj {
 
 endgame = room {
    nam = "Конец"
+  ,enter = mute_()
   ,dsc = "Интересно, где бы мне взять исправную ногу?^^"
   ,act = gamefile_("repair.lua")
   ,obj = { vobj("next", txtc("{Продолжение...}")) }

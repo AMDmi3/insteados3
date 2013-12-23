@@ -28,14 +28,15 @@ alphas = {
   ,["Ш"] = { 123, 5}
   ,["Щ"] = { 129, 6}
   ,["Ъ"] = { 136, 5}
-  ,["Ь"] = { 142, 6}
-  ,["Ы"] = { 149, 4}
+  ,["Ы"] = { 142, 6}
+  ,["Ь"] = { 149, 4}
   ,["Э"] = { 154, 4}
   ,["Ю"] = { 159, 5}
   ,["Я"] = { 165, 4}
   ,["0"] = { 170, 4}
   ,["7"] = { 175, 4}
   ,["2"] = { 180, 4}
+  ,["Й"] = { 185, 5}
   ,[" "] = { nil, 3}
 }
 function drawalpha(num,str)
@@ -446,6 +447,9 @@ end
 
 function mute_(fadeout,fadein)
   return function()
+    if fadeout == nil then
+      fadeout = 3000;
+    end
     play_music(nil, nil, fadeout, fadein);
   end
 end

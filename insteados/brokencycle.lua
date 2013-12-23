@@ -9,7 +9,17 @@ require "quotes"
 require "timer"
 require "xact"
 game.use='Не получается.'
-main=room{
+
+main = room {
+   nam = "..."
+  ,enter = music_("datagroove",0)
+  ,title = { "Р", "А", "З", "О", "Р", "В", "А", "Н", "Н", "Ы", "Й", " ", "Ц", "И", "К", "Л"}
+  ,num = 6
+  ,act = function(s) walk(main2)end
+  ,obj = { vobj("next", '{Начать игру}') }
+}
+
+main2=room{
    nam='Капсула',
    dsc='Сознание вернулось. А в месте с ним вернулись мрак и холод.',
    act=code 'walk(capsule)',
@@ -545,6 +555,9 @@ hend=room{
    nam='Конец',
    dsc='Я прикрутил руку и спокойно начал нести свою вахту.',
    enter=function()
+      mute_()();
       inv():disable_all()
    end,
+   act = gamefile_("meteor.lua"),
+  obj = { vobj("next", txtc("^{Продолжение...}")) }
 }

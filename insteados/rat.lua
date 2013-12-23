@@ -54,6 +54,7 @@ start3 = room {
 }
 start4 = room {
   nam = "..."
+  ,enter = music_("daybefore", 0)
   ,title = { "К", "Р", "Ы", "С", "И", "Н", "А", "Я", " ", "Н", "О", "Р", "А" }
   ,num = 1
   ,act = function() take(eat);take(cry);take(th);take(climb);take(cry);take(push);walk(floor) end
@@ -296,6 +297,7 @@ oncloner1 = room {
 
 end1 = room {
   nam = ""
+ ,enter = mute_()
  ,act=function(s) walk(end2) end
  ,pxa = { { "door4", 190 } }
  ,dsc = [[Я пищать пи-па-пи-пи-па, и дверь открываться! Я тут же бежать из комната. Я вдруг думать -- зачем я бежать из комната, ведь там много других Я и много сыра! Но дверь уже закрыться! Я пищать на дверь, но дверь -- "не обнаружено объекта"! Это ужасно!]]
@@ -314,6 +316,7 @@ timer=function()timer:stop();walk(end3)end
 end3=room{
   nam="",
   enter=function(s)
+  music_("spookyloop")();
   timer:set(3000)
   end,
   pxa = {
@@ -344,7 +347,8 @@ timer=function()timer:stop();walk(end6)end
 }
 end6=room{
 nam="",
+enter = mute_(),
 act = gamefile_("longwork.lua"),
-obj = { vobj("next", txtc("^{КОНЕЦ?}")) }
+obj = { vobj("next", txtc("КОНЕЦ?^^{Это только начало...}")) }
 }
 

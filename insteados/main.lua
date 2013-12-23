@@ -10,9 +10,14 @@ require "xact"
 
 main = room {
    nam = "Об игре"
+  ,enter = music_("datagroove",0)
   ,pic = "gfx/caption.png"
   ,dsc =
-    [[Сборник игр INSTEADOSE 3]]
+    [["ИНСТЕДОЗ 3" -- это сборник небольших текстовых игр, написанных разными авторами в рамках единого сюжета. Сборник включает в себя
+      17 самостоятельных игр, однако все они складываются в отдельную историю, поэтому мы советуем вам пройти "ИНСТЕДОЗ 3" последовательно,
+      начиная с пролога и до самого конца.^^
+      "ИНСТЕДОЗ 3" проводился в 2013 году. В создании этого сборника принимали участие двенадцать авторов. Подробную информацию о создателях
+      смотрите в разделе "Создатели".]]
 }
 
 credits = room {
@@ -63,29 +68,32 @@ test2 = room {
 }
 
 empty = menu { nam = "" }
+empty2 = menu { nam = "" }
 
-watch = chapter {
-  nam = "1. Вахта"
+
+prologue = chapter {
+  nam = "0. Пролог"
 }
-
+rat = chapter {
+  nam = "1. Крысиная нора"
+}
 longwork = chapter {
   nam = "2. Долгая служба"
 }
-
 repair = chapter {
   nam = "3. Ремонт"
 }
-
 crio = chapter {
   nam = "4. Отсек 007"
 }
-
-brokencycle = chapter {
-  nam = "5. Разорванный цикл"
+watch = chapter {
+  nam = "5. Вахта"
 }
-
+brokencycle = chapter {
+  nam = "6. Разорванный цикл"
+}
 meteor = chapter {
-  nam = "6. Пояс астероидов"
+  nam = "7. Пояс астероидов"
 }
 
 wake = chapter {
@@ -112,10 +120,6 @@ wake2 = chapter {
   nam = "12. Пробуждение-2"
 }
 
-rat = chapter {
-  nam = "13. Крысиная нора"
-}
-
 robot = chapter {
   nam = "14. Робот, который видит..."
 }
@@ -124,9 +128,6 @@ dream = chapter {
   nam = "15. Сон"
 }
 
-prologue = chapter {
-  nam = "0. Пролог"
-}
 
 persona = chapter {
   nam = "16. Личность"
@@ -141,19 +142,21 @@ function init()
   take(before_Credits);
   take(empty);
   take(prologue);
-  take(watch);
+  take(rat);
   take(longwork);
   take(repair);
   take(crio);
+  take(watch);
   take(brokencycle);
   take(meteor);
+  
+  take(empty2);
   take(wake);
   take(cook);
   take(engineer);
   take(nightmare);
   take(oldfriend);
   take(wake2);
-  take(rat);
   take(robot);
   take(dream);
   take(persona);
