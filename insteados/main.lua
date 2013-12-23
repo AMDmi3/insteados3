@@ -17,7 +17,8 @@ main = room {
       17 самостоятельных игр, однако все они складываются в отдельную историю, поэтому мы советуем вам пройти "ИНСТЕДОЗ 3" последовательно,
       начиная с пролога и до самого конца.^^
       "ИНСТЕДОЗ 3" проводился в 2013 году. В создании этого сборника принимали участие двенадцать авторов. Подробную информацию о создателях
-      смотрите в разделе "Создатели".]]
+      смотрите в разделе "Создатели".^^
+      Версия 0.1]]
 }
 
 credits = room {
@@ -39,7 +40,15 @@ credits = room {
       ^Максим "j-maks" ("Робот, который видит...")
       ^Пётр Косых ("Отсек К007", "Прибытие")
       ^Роман "Irreman" ("Инженер")
-      ^zerg.pro ("Личность")]]
+      ^zerg.pro ("Личность")^^]]..
+    txtb("Музыка:")..
+    [[^8bit Betty ("Spooky Loop")
+      ^J. Arthur Keenes ("The Day Before Boxing Day Eve")
+      ^Rolemusic ("Ladybug Castle", "Spell", "Scape from the city", "Death on the battlefield")
+      ^Goto80 ("this machine thinks", "square and enjoy", "influensa", "datagroove", "5pyhun73r 3l337 v3r")
+      ^Edward Shallow ("The Infinite Railroad")
+      (Подробную информацию об используемой в игре музыке см. в прилагаемом файле music.txt)
+    ]]
 }
 
 function chapter(s)
