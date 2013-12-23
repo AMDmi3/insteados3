@@ -623,6 +623,7 @@ hend1 = room {
 
 hend2 = room {
 	nam = 'Конец';
+  enter = music_("poppies");
   pxa = {
     { "planet", 172, 22 }
   };
