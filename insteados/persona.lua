@@ -82,6 +82,7 @@ programmator_mozgov = obj {
 
 coderoom = room {
 	nam = "Кодовый замок",
+	forcedsc = true,
 	dsc = "Это ящик Александра",
 	way = {"main2"},
 	obj = {"one","two","three","four", "openbox"},
@@ -97,7 +98,7 @@ one = obj {
 		if onedsc == 10 then
 			onedsc = 0;
 		end;
-		walk("coderoom")
+		return true
 	end
 }
 
@@ -111,7 +112,7 @@ two = obj {
 		if twodsc == 10 then
 			twodsc = 0;
 		end;
-		walk("coderoom")
+		return true
 	end
 }
 
@@ -125,7 +126,7 @@ three = obj {
 		if threedsc == 10 then
 			threedsc = 0;
 		end;
-		walk("coderoom")
+		return true
 	end
 }
 
@@ -139,7 +140,7 @@ four = obj {
 		if fourdsc == 10 then
 			fourdsc = 0;
 		end;
-		walk("coderoom")
+		return true
 	end
 }
 
