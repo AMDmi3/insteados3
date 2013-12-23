@@ -82,7 +82,12 @@ programmator_mozgov = obj {
 
 coderoom = room {
 	nam = "Кодовый замок",
-	forcedsc = true,
+	entered = function(s)
+		s._flt = stead.mouse_filter(0)
+	end;
+	left = function(s)
+		stead.mouse_filter(s._flt)
+	end;
 	dsc = "Это ящик Александра",
 	way = {"main2"},
 	obj = {"one","two","three","four", "openbox"},
@@ -98,6 +103,7 @@ one = obj {
 		if onedsc == 10 then
 			onedsc = 0;
 		end;
+		stead.need_scene()
 		return true
 	end
 }
@@ -112,6 +118,7 @@ two = obj {
 		if twodsc == 10 then
 			twodsc = 0;
 		end;
+		stead.need_scene()
 		return true
 	end
 }
@@ -126,6 +133,7 @@ three = obj {
 		if threedsc == 10 then
 			threedsc = 0;
 		end;
+		stead.need_scene()
 		return true
 	end
 }
@@ -140,6 +148,7 @@ four = obj {
 		if fourdsc == 10 then
 			fourdsc = 0;
 		end;
+		stead.need_scene()
 		return true
 	end
 }
@@ -292,3 +301,9 @@ disk_in_chestroom = obj {
 	dsc = "Внутри ящика {диск} с резервной копией личности Александра.. но он разломан и всюду видно следы чьих-то зубов. Надо найти другой диск.",
 	act = "Диск значительно поврежден. Использовать его не получится. Нужен еще один.",
 }
+
+function start()
+	if here() == coderoom then
+		stead.mouse_filter(0)
+	end
+end
