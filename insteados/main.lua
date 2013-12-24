@@ -25,8 +25,11 @@ main = room {
     end
    end
   ,enter = function(s)
-    if iscomplete("insteadose") then
+    if iscomplete("insteadose") or main.insteadose then
       music_("poppies",0)();
+      prefs["insteadose"] = nil;
+      prefs:store();
+      main.insteadose = true;
     else
       music_("railroad",0)();
     end
@@ -219,5 +222,5 @@ function init()
   take(wake);
   take(wake2);
   take(arrival);
-  --take(endtitles);
+  take(endtitles);
 end
