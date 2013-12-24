@@ -222,5 +222,5 @@ function init()
   take(wake);
   take(wake2);
   take(arrival);
-  --take(endtitles);
+  take(endtitles);
 end

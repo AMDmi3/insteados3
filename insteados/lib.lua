@@ -134,8 +134,7 @@ end
 local old_title = instead.get_title;
 instead.get_title = function()
   local r = old_title();
-  r = string.gsub(r, "\n", "");
-  return r.."\n\n\n";
+  return txttop(r)..img("blank:10x50");
 end
 
 function if_(cnd,x,y)
