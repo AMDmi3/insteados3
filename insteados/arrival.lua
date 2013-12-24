@@ -134,7 +134,7 @@ function gun(n)
 				return
 			end
 			if w.destr then
-				sound_("shoot_lazer")();
+				sound_("shoot_bfg")();
         p [[Я разрядил плазменную пушку.]]
 				if w == door then
 					if w._open then
