@@ -233,7 +233,7 @@ function timerpause(snum,enum,next)
     end,
     draw = function(s,d)
       local d = tostring(d);
-      local n1,n2,n3,n4 = d:charat(1),d:charat(2),d:charat(3),d:charat(4);
+      local n1,n2,n3,n4 = string.char(d:byte(1)),string.char(d:byte(2)),string.char(d:byte(3)),string.char(d:byte(4));
       local y = 67;
       if s.s1 ~= n1 then
         sprite.copy(s:loadnum(n1), game.cache2, 150+(50*0), y);
