@@ -59,6 +59,7 @@ blasterPistol = obj {
 	        p "Бластер не стреляет в членов экипажа. Лучше не тратить на это время."
 	    end;
 	elseif w == rat then
+      sound_("shoot_lazer")();
 	    walk(v_10);
 	else
 	    p "Это не поможет";

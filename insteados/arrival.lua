@@ -134,15 +134,16 @@ function gun(n)
 				return
 			end
 			if w.destr then
-				p [[Я разрядил плазменную пушку.]]
+				sound_("shoot_lazer")();
+        p [[Я разрядил плазменную пушку.]]
 				if w == door then
 					if w._open then
 						p "Дверь и так открыта."
 					else
-						p "Дверь выдержала."
+        		p "Дверь выдержала."
 					end
 				elseif w == rob then
-					p [[Робот скрылся.]]
+				  p [[Робот скрылся.]]
 					rob:disable()
 				elseif w == prog then
 					if not gen._b then

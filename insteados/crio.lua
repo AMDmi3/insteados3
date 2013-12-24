@@ -130,6 +130,7 @@ blast = O {
 	use = function(s, w)
 		if _alert then
 			if w == sh and _port and not taken(port2) then
+				sound_("shoot_lazer")();
 				p [[Я разнес швабру бластером!!!]]
 				rem(sh, me())
 				put(trash)
@@ -139,6 +140,7 @@ blast = O {
 		end
 		if w == rat then
 			if not s._s then
+				sound_("shoot_lazer")();
 				s._s = true
 				p [[Я прицелился и выстрелил в эту гадину.]]
 				p [[^^Проклятые манипуляторы!
@@ -413,6 +415,9 @@ p2 = room {
 		dsc = "{Дальше}";
 		act = function(s)
 			here()._s = here()._s + 1
+      if here()._s == 2 then
+        sound_("shoot_lazer")();
+      end
 			if here()._s == 8 then
 				back();
 			end
