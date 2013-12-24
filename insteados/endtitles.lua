@@ -37,18 +37,43 @@ function titleroom(r)
   return room(r);
 end
 
-main = titleroom {
+function drawbg(s)
+  if not main.bgdrawn then
+    local px = sprite.load("theme/back.png");
+    sprite.copy(px, sprite.screen(), 0, 0);
+    sprite.free(px);
+    main.bgdrawn = true;
+  end
+  if not s.bgdrawn then
+    local px = sprite.box(500, 200, "black");
+    sprite.copy(px, sprite.screen(), 30, 30);
+    sprite.free(px);
+    cleanlines();
+    s.bgdrawn = true;
+  end
+end
+
+main = room {
    nam = ""
   ,enter = function(s)
     mute_(0,0)();
     music_("datagroove")();
+    timer:set(600);
+   end
+  ,timer = function(s)
+    timer:stop();
+    walk(title1);
+   end
+}
+
+title1 = titleroom {
+   nam = ""
+  ,enter = function(s)
     timer:set(200);
    end
   ,prepare = function(s)
+      drawbg(s);
       if not s.directdrawn then
-        local px = sprite.load("theme/back.png");
-        sprite.copy(px, sprite.screen(), 0, 0);
-        sprite.free(px);
         local tab = sprite.load("gfx/table5.png");
         sprite.copy(tab, sprite.screen(), 130, 110);
         sprite.free(tab);
@@ -118,12 +143,7 @@ title2 = titleroom {
     timer:set(200);
    end
   ,prepare = function(s)
-      if not s.directdrawn then
-        local px = sprite.load("theme/back.png");
-        sprite.copy(px, sprite.screen(), 0, 0);
-        sprite.free(px);
-        s.directdrawn = true;
-      end
+    drawbg(s);
    end
   ,timer = function(s)
     s:prepare();
@@ -233,12 +253,7 @@ title3 = titleroom {
     timer:set(200);
    end
   ,prepare = function(s)
-      if not s.directdrawn then
-        local px = sprite.load("theme/back.png");
-        sprite.copy(px, sprite.screen(), 0, 0);
-        sprite.free(px);
-        s.directdrawn = true;
-      end
+      drawbg(s);
    end
   ,timer = function(s)
     s:prepare();
@@ -257,59 +272,59 @@ title3 = titleroom {
       sprite.copy(spr1, sprite.screen(), 400, 165);
     elseif s._frame == 2 then
       sprite.copy(s.bx, sprite.screen(), 400, 165);
-      sprite.copy(spr1, sprite.screen(), 390, 155);
+      sprite.copy(spr1, sprite.screen(), 390, 160);
     elseif s._frame == 3 then
-      sprite.copy(s.bx, sprite.screen(), 390, 155);
-      sprite.copy(spr1, sprite.screen(), 380, 145);
+      sprite.copy(s.bx, sprite.screen(), 390, 160);
+      sprite.copy(spr1, sprite.screen(), 380, 155);
     elseif s._frame == 4 then
-      sprite.copy(s.bx, sprite.screen(), 380, 145);
-      sprite.copy(spr1, sprite.screen(), 370, 135);
+      sprite.copy(s.bx, sprite.screen(), 380, 155);
+      sprite.copy(spr1, sprite.screen(), 370, 150);
     elseif s._frame == 5 then
-      sprite.copy(s.bx, sprite.screen(), 370, 135);
-      sprite.copy(spr1, sprite.screen(), 360, 145);
+      sprite.copy(s.bx, sprite.screen(), 370, 150);
+      sprite.copy(spr1, sprite.screen(), 360, 155);
     elseif s._frame == 6 then
-      sprite.copy(s.bx, sprite.screen(), 360, 145);
-      sprite.copy(spr1, sprite.screen(), 350, 155);
+      sprite.copy(s.bx, sprite.screen(), 360, 155);
+      sprite.copy(spr1, sprite.screen(), 350, 160);
     elseif s._frame == 7 then
-      sprite.copy(s.bx, sprite.screen(), 350, 155);
+      sprite.copy(s.bx, sprite.screen(), 350, 160);
       sprite.copy(spr1, sprite.screen(), 340, 165);
     
     elseif s._frame == 8 then
       sprite.copy(s.bx, sprite.screen(), 340, 165);
-      sprite.copy(spr1, sprite.screen(), 330, 155);
+      sprite.copy(spr1, sprite.screen(), 330, 160);
     elseif s._frame == 9 then
-      sprite.copy(s.bx, sprite.screen(), 330, 155);
-      sprite.copy(spr1, sprite.screen(), 320, 145);
+      sprite.copy(s.bx, sprite.screen(), 330, 160);
+      sprite.copy(spr1, sprite.screen(), 320, 155);
     elseif s._frame == 10 then
-      sprite.copy(s.bx, sprite.screen(), 320, 145);
-      sprite.copy(spr1, sprite.screen(), 310, 135);
+      sprite.copy(s.bx, sprite.screen(), 320, 155);
+      sprite.copy(spr1, sprite.screen(), 310, 150);
     elseif s._frame == 11 then
-      sprite.copy(s.bx, sprite.screen(), 310, 135);
-      sprite.copy(spr1, sprite.screen(), 300, 145);
+      sprite.copy(s.bx, sprite.screen(), 310, 150);
+      sprite.copy(spr1, sprite.screen(), 300, 155);
     elseif s._frame == 12 then
-      sprite.copy(s.bx, sprite.screen(), 300, 145);
-      sprite.copy(spr1, sprite.screen(), 290, 155);
+      sprite.copy(s.bx, sprite.screen(), 300, 155);
+      sprite.copy(spr1, sprite.screen(), 290, 160);
     elseif s._frame == 13 then
-      sprite.copy(s.bx, sprite.screen(), 290, 155);
+      sprite.copy(s.bx, sprite.screen(), 290, 160);
       sprite.copy(spr1, sprite.screen(), 280, 165);
 
     elseif s._frame == 14 then
       sprite.copy(s.bx, sprite.screen(), 280, 165);
-      sprite.copy(spr1, sprite.screen(), 270, 155);
+      sprite.copy(spr1, sprite.screen(), 270, 160);
     elseif s._frame == 15 then
-      sprite.copy(s.bx, sprite.screen(), 270, 155);
-      sprite.copy(spr1, sprite.screen(), 260, 145);
+      sprite.copy(s.bx, sprite.screen(), 270, 160);
+      sprite.copy(spr1, sprite.screen(), 260, 155);
     elseif s._frame == 16 then
-      sprite.copy(s.bx, sprite.screen(), 260, 145);
-      sprite.copy(spr1, sprite.screen(), 250, 135);
+      sprite.copy(s.bx, sprite.screen(), 260, 155);
+      sprite.copy(spr1, sprite.screen(), 250, 150);
     elseif s._frame == 17 then
-      sprite.copy(s.bx, sprite.screen(), 250, 135);
-      sprite.copy(spr1, sprite.screen(), 240, 145);
+      sprite.copy(s.bx, sprite.screen(), 250, 150);
+      sprite.copy(spr1, sprite.screen(), 240, 155);
     elseif s._frame == 18 then
-      sprite.copy(s.bx, sprite.screen(), 240, 145);
-      sprite.copy(spr1, sprite.screen(), 230, 155);
+      sprite.copy(s.bx, sprite.screen(), 240, 155);
+      sprite.copy(spr1, sprite.screen(), 230, 160);
     elseif s._frame == 19 then
-      sprite.copy(s.bx, sprite.screen(), 230, 155);
+      sprite.copy(s.bx, sprite.screen(), 230, 160);
       sprite.copy(spr1, sprite.screen(), 220, 165);
     
     elseif s._frame == 20 then
@@ -372,12 +387,7 @@ title4 = titleroom {
     timer:set(200);
    end
   ,prepare = function(s)
-      if not s.directdrawn then
-        local px = sprite.load("theme/back.png");
-        sprite.copy(px, sprite.screen(), 0, 0);
-        sprite.free(px);
-        s.directdrawn = true;
-      end
+      drawbg(s);
    end
   ,timer = function(s)
     s:prepare();
@@ -461,17 +471,14 @@ title4 = titleroom {
    end
 }
 
-
 title5 = titleroom {
    nam = ""
   ,enter = function(s)
     timer:set(200);
    end
   ,prepare = function(s)
+      drawbg(s);
       if not s.directdrawn then
-        local px = sprite.load("theme/back.png");
-        sprite.copy(px, sprite.screen(), 0, 0);
-        sprite.free(px);
         local spr = loadsprite("hatch2");
         sprite.copy(spr, sprite.screen(), 330, 30);
         s.directdrawn = true;
@@ -580,11 +587,17 @@ title5 = titleroom {
     elseif s._frame == 75 then
       mute_()();
       theme.gfx.reset();
-      main.directdrawn=nil;
+      main.bgdrawn = nil;
+      title1.directdrawn=nil;
       title2.directdrawn=nil;
       title3.directdrawn=nil;
       title4.directdrawn=nil;
-      title5.directdrawn=nil;
+      title5.directdrawn=nil; 
+      title1.bgdrawn=nil;
+      title2.bgdrawn=nil;
+      title3.bgdrawn=nil;
+      title4.bgdrawn=nil;
+      title5.bgdrawn=nil;
       game.codec=nil;
       if game.cachefont ~= nil then
         sprite.free_font(cachefont);
@@ -627,14 +640,15 @@ hend2 = room {
   pxa = {
     { "planet", 172, 22 }
   };
+  act = stead.restart;
 	dsc = [[
 		-- Я думаю вы должны знать.^
 		-- Да?^
 		-- Мы выяснили, куда делись жители планеты...^
 		-- И?^
-		-- Похоже, они отправились к Земле...^^
-		<c>КОНЕЦ</c>
+		-- Похоже, они отправились к Земле...
 	]];
+  obj = { vobj("next", txtc("{КОНЕЦ}")) }
 }
 
 
