@@ -25,7 +25,11 @@ main = room {
     end
    end
   ,enter = function(s)
-    music_("railroad",0)();
+    if iscomplete("insteadose") then
+      music_("poppies",0)();
+    else
+      music_("railroad",0)();
+    end
     timer:set(90);
    end
   ,timer = function(s)

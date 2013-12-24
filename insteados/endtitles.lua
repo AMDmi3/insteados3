@@ -636,11 +636,14 @@ hend1 = room {
 
 hend2 = room {
 	nam = 'Конец';
-  enter = music_("poppies");
+  enter = music_("poppies",0);
   pxa = {
     { "planet", 172, 22 }
   };
-  act = stead.restart;
+  act = function()
+    complete_("insteadose")();
+    gamefile_("main.lua")();
+  end;
 	dsc = [[
 		-- Я думаю вы должны знать.^
 		-- Да?^
