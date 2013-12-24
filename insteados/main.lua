@@ -1,4 +1,4 @@
--- $Name: ИНСТЕДОЗ 3$
+-- $Name: ИНСТЕДОЗ 3: Последний рейс$
 -- $Version: 0.1$
 instead_version "1.9.1"
 require "lib"
