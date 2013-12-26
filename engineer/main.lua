@@ -70,7 +70,7 @@ case = obj {
 hatch = obj {
 	nam = 'Люк';
 	dsc = function()
-		if seen('deck', ways(here())) then p 'За {открытой гермодверью} виден тускло овещенный коридор.';
+		if seen('deck', ways(here())) then p 'За {открытой гермодверью} виден тускло освещенный коридор.';
 		else p 'На {панели у выходного люка} мигает огонек.'; end;
 	end;
 	act = function()
