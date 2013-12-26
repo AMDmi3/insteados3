@@ -107,9 +107,15 @@ credits = room {
       ^J. Arthur Keenes ("The Day Before Boxing Day Eve")
       ^Rolemusic ("Ladybug Castle", "Spell", "Scape from the city", "Death on the battlefield", "Poppies")
       ^Goto80 ("this machine thinks", "square and enjoy", "influensa", "datagroove", "5pyhun73r 3l337 v3r")
-      ^Edward Shallow ("The Infinite Railroad")
-      (Подробную информацию об используемой в игре музыке см. в прилагаемом файле music.txt)
-    ]]
+      ^Edward Shallow ("The Infinite Railroad")^^
+     ]]..
+     txtb("Шрифты:")..
+     [[^Pixel Font-7 (разработчик www.styleseven.com, бесплатен для бесплатного ПО)
+       ^Terminus (SIL OFL 1.1)^^
+     ]]..
+     txtb("Код и графика:^")..
+     [[Весь код игр, библиотечный код, а также всё графическое оформление доступны под лицензией CC BY 4.0^^
+      (Подробную информацию о лицензиях см. в прилагаемом файле licenses.txt)]]
 }
 
 function chapter(s)
