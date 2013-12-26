@@ -286,9 +286,9 @@ redwire = obj {
    _set= "red"
   ,dsc = function(s)
      if s._set == "" and have(red) then
-       return "Красный провод отсоёдинен.";
+       return "Красный провод отсоединён.";
      elseif s._set == "" then
-       return "{Красный провод} отсоёдинен.";
+       return "{Красный провод} отсоединён.";
      end
      local str = "А {красный провод} подключён к ";
      return turn(s,str);
