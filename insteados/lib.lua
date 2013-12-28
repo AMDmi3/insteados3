@@ -421,6 +421,8 @@ function()
           y = 155;
         elseif vv == "ratsmall" then
           y = 165;
+        elseif vv == "stick" then
+          y = 170;
         end
       end
       sprite.compose(spr, game.cache, tc(v[2],s), y);

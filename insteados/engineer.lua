@@ -202,6 +202,8 @@ badend = room {
 	nam = 'Конец';
 	hideinv = true;
 	dsc = 'Это конец.';
+  act = gamefile_("engineer.lua");
+  obj = { vobj("next", '{Начать с начала?}') }
 };
 
 status = stat {

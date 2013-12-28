@@ -57,7 +57,7 @@ start4 = room {
   ,enter = music_("daybefore", 0)
   ,title = { "К", "Р", "Ы", "С", "И", "Н", "А", "Я", " ", "Н", "О", "Р", "А" }
   ,num = 1
-  ,act = function() take(eat);take(cry);take(th);take(climb);take(cry);take(push);walk(floor) end
+  ,act = function() take(eat);take(cry);take(th);take(climb);take(cry);walk(floor) end
   ,dsc= "Я бежать мимо человеков, потом бежать в какой-то странный большой нора, который двигаться вверх! Потом я бежать куда-то, где много человеков. Я бояться! Я лезть на ящик. Потом я лезть на ящик. Потом я ещё лезть на ящик. Потом я лезть в потолочный нора. Потом я бежать по потолочный нора -- длинный-длинный нора! Потом я вдруг падать! Больно падать! И вот я здесь..."
   ,obj = { vobj("next", '{Где я?}') }
 }
@@ -88,6 +88,11 @@ push = vb {
 th = vb {
    nam = "ГРЫЗТЬ"
   ,use = function(s,v)
+  if v==cheesetake_stick then
+    cheesetake._on = false;
+    cheesetake0._on = true;
+    return "Я грызть странный скобка. Скобка неожиданно сгибаться, и сыр падать со стола!";
+  end
   if v==chair1 or v==chair2 then return "Я грызть стул... Стул есть невкусный! Не еда!" end
   if v==desk1 or v==desk2 then return "Я пытаться грызть стол... Глупый стол! Почти сломать мне зуба!" end
   if v==door then return "Человечий двери не прогрызть! Я пытаться... Терять два, нет... двадцать два зуба!" end
@@ -235,15 +240,22 @@ ondesk = room {
    nam = "На столе"
   ,pxa = {
      { if_("foodgen._ch", "foodgen2","foodgen"), 0 },
-     { if_("cheesetake._on","cheese"), 160 },
+     { if_("cheesetake._on","stick"), 160 },
+     { if_("cheesetake._on","cheese"), 160, 130 },
      { "computer", 390 },
    }
   ,dsc = "Я сидеть на стол. Здесь запах!"
-  ,obj = { "chair2", "foodgen", "foodgen2", "cheesetake", "computer", "shaft2", "device2" }
+  ,obj = { "chair2", "foodgen", "foodgen2", "cheesetake_stick", "cheesetake", "computer", "shaft2", "device2" }
+}
+
+cheesetake_stick = obj {
+   dsc = "Из стол выдвигаться странный {скобка},"
+  ,act = "Странный скобка."
+  ,cnd = function(s) return cheesetake._on end
 }
 
 cheesetake = obj {
-   dsc = "Из устройства с ручкой упасть {сыр}!"
+   dsc = "на котором лежать {сыр}!"
   ,act = "Сыр! Вкусно! Жрать! Жрать! Жрать!"
   ,cnd = function(s) return s._on end
 }
@@ -254,7 +266,7 @@ chair2 = obj {
 }
 
 foodgen = obj {
-   dsc = "На стол есть ящик с {синий ручка} и"
+   dsc = "На стол есть ящик с {длинный ручка} и"
   ,act = "Странно. Пахнуть еда. На устройство надпись: синтезатор... лактоза.. Больше не понимать! Давно ходить школа!"
 }
 
