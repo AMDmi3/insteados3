@@ -126,9 +126,9 @@ wishlist = obj {
 }
 
 ingridients = obj {
-	nam = "Ингридиенты",
+	nam = "Ингредиенты",
 	act = function(s) walk("virtual_store"); end,
-	dsc = "{Выбор ингридиентов}^",
+	dsc = "{Выбор ингредиентов}^",
 }
 
 mixer = obj {
