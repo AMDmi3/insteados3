@@ -113,6 +113,9 @@ function gun(n)
 		tak = function(s)
 			_guns = _guns + 1
 			p [[Я примонтировал плазменную пушку.]];
+			if not s._alive then
+				lifeon(s)
+			end
 		end;
 		use = function(s, w)
 			if w == floor then
