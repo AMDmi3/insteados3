@@ -145,7 +145,7 @@ before_Credits = menu {
   ,inv = function() walk(credits) end
 }
 
-empty = menu { nam = "" }
+empty = stat { nam = "" }
 
 prologue = chapter {
   nam = "Пролог"
